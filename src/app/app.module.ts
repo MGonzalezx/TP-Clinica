@@ -13,12 +13,12 @@ import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NavbarComponent } from './components/navbar/navbar.component';
+
 import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     BienvenidaComponent
   ],
   imports: [
@@ -32,7 +32,8 @@ import { BienvenidaComponent } from './components/bienvenida/bienvenida.componen
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

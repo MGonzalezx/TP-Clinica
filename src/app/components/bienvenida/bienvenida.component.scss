@@ -1,45 +1,85 @@
 img{
-    height: 25%;
-    clip-path: circle(45.6% at 50% 50%);
-    background-color: rgba(145, 145, 145, 0.282);
-    margin-left: 25%;
-    
-  }
+  clip-path: circle(50.4% at 50% 50%);
+  background-color: rgba(145, 145, 145, 0.282);
+  
+}
+
+
+h1 .title{
+  text-shadow: -14px 9px 8px;
+  color: #2E1F66 ;
+  
+}
+
+.titulo{
+  
+  font-family:'Courier New', Courier, monospace;
+  text-shadow: -1px 3px 3px;
+  color:#2E1F66 ;
+  font-size: 70px;
+  font-weight: 700;
+  margin-top: 25%;
+  background-color: rgba(250, 235, 215, 0.555);
+
+}
+
+h4{
+  font-family:'Courier New', Courier, monospace;
+  color:#2E1F66 ;
+  font-size: 35px;
+  font-weight: 900;
+  background-color: rgba(250, 235, 215, 0.555);
+}
+
+.colum01{
+  padding: 3%;
+  color:rgb(27, 48, 89);
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  
+  
+}
+
+.colum02{
+  padding: 5%;
+}
 
 .contenedor{
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
-    align-content: center; 
-    min-height: 100vh; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  align-content: center; 
+  min-height: 100vh; 
+  background-color: lightgray; 
 }
 
 .form-signin {
-  width: 100%;  
-  background-color: #FE4A49 ;
-  border-radius: 25px;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
+width: 100%;  
+background-color: rgba(250, 235, 215, 0.555);
+border-radius: 25px;
+max-width: 330px;
+padding: 15px;
+margin: auto;
+margin-left: 55%;
+
 }
 
 .form-signin .checkbox {
-  font-weight: 400;
+font-weight: 400;
 }
 
 .form-signin .form-floating:focus-within {
-  z-index: 2;
+z-index: 2;
 }
 
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+margin-bottom: -1px;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
 }
 
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+margin-bottom: 10px;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
 }
