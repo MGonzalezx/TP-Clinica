@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+
+body{
+    background-image:  url(./assets/fondo-2doc.jpg) ;
+    /* background-image:  url(./assets/img/SalaDeEspera.jpg) ; */
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';
