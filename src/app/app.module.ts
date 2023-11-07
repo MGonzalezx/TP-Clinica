@@ -15,11 +15,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { RegisterPacienteComponent } from './components/register-paciente/register-paciente.component';
+import { RegisterEspecialistaComponent } from './components/register-especialista/register-especialista.component';
+import { RegisterAdministradorComponent } from './components/register-administrador/register-administrador.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BienvenidaComponent
+    BienvenidaComponent,
+    LoginComponent,
+    RegisterComponent,
+    RegisterPacienteComponent,
+    RegisterEspecialistaComponent,
+    RegisterAdministradorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,54 @@
+<div  class="login-page">
+    <div class="form">
+        
+        <form class="form-group" (ngSubmit)="onSubmit()" [formGroup]="form" class="form-signin">
+            <h1>Iniciar Sesion</h1><br>
+            
+            <input type="text" id="email" class="form-control" placeholder="Email"  formControlName="email">
+            <div *ngIf="form.controls['email'].errors != null">
+                <small
+                  class="invalid"
+                  *ngIf="
+                    form.controls['email'].errors!['required'] &&
+                    form.controls['email'].touched
+                  "
+                  >Debe ingresar su mail..</small
+                >
+                <small
+                  class="invalid"
+                  *ngIf="
+                    form.controls['email'].errors!['email'] &&
+                    form.controls['email'].touched
+                  "
+                  >Ingrese un email valido</small
+                >
+              </div>
+            <input type="password" id="password" class="form-control" placeholder="Contraseña"  formControlName="password" >
+            <div *ngIf="form.controls['password'].errors != null">
+                <small
+                  class="invalid"
+                  *ngIf="
+                    form.controls['password'].errors!['required'] &&
+                    form.controls['password'].touched
+                  "
+                  >Debe ingresar su contraseña..</small
+                >
+              </div>
+            
+            <button type="submit" >login</button>
+            
+            
+            <br>
+         
+                <img src='./../../../assets/ImgUser_test/martin.png' class="test_A" (click)="completarCamposAdmin()" >
+                <img src='./../../../assets/ImgUser_test/oscar.png' class="test_A" (click)="completarDrOscar()">
+                <img src='./../../../assets/ImgUser_test/robotnik.jpg' class="test_A" (click)="completarDrRobotnik()">
+                <img src='./../../../assets/ImgUser_test/pacienteB.jpg' class="test_A" (click)="completarPacienteA()">
+                <img src='./../../../assets/ImgUser_test/pacienteA.jpg' class="test_A" (click)="completarPacienteB()">
+                <img src='./../../../assets/ImgUser_test/pacienteC.jpg' class="test_A" (click)="completarPacienteC()">
+                
+            </form>
+        </div>
+    </div>
+  
+ 
