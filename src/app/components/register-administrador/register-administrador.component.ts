@@ -105,7 +105,7 @@ export class RegisterAdministradorComponent {
         showConfirmButton: false,
         timer: 1500,
       });
-      this.router.navigate(['/login']);
+      this.router.navigate(['/homeAdmin']);
     } catch (error: any) {
       this.errorCheck = true;
       switch (error.code) {

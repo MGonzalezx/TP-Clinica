@@ -197,7 +197,7 @@ export class FirebaseService {
         return null;
       }
       const especialistaData = querySnapshot.docs[0].data();
-      const admin = new Especialista(
+      const especialista = new Especialista(
         especialistaData['uid'],
         especialistaData['nombre'],
         especialistaData['apellido'],
@@ -207,7 +207,7 @@ export class FirebaseService {
         especialistaData['foto1'],
         especialistaData['verificado'],
       );
-      return admin;
+      return especialista;
     } catch (error) {
       console.error('Error al buscar el especialista por UID: ', error);
       return null;
@@ -282,4 +282,6 @@ export class FirebaseService {
       }
     }
   }  
+
+ 
 }

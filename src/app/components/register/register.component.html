@@ -18,6 +18,17 @@
         <br>
         <small>Especialista</small>
       </button>
+
+      <button
+      class="btn"
+      (click)="mostrarRegistroAdministrador()"
+      [class.active]="mostrarRegistroAdministradores"
+      *ngIf="seLogueoAdmin"
+    >
+      <img src="../../../assets/logoAdmin.png" alt="" width="150" height="130" />
+      <br>
+      <small>Administrador</small>
+    </button>
     </div>
   
     <div class="registro-form">
@@ -27,6 +38,10 @@
   
       <div *ngIf="mostrarRegistroEspecialistas">
         <app-register-especialista></app-register-especialista>
+      </div>
+
+      <div *ngIf="mostrarRegistroAdministradores">
+        <app-register-administrador></app-register-administrador>
       </div>
     </div>
   </main>
