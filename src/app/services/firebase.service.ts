@@ -30,6 +30,7 @@ import { Admin } from '../clases/admin';
 import { Paciente } from '../clases/paciente';
 import { Especialista } from '../clases/especialista';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root'
 })
@@ -39,13 +40,18 @@ export class FirebaseService {
 
   user: User | null = null;
 
-  constructor(public auth: Auth, public router:Router) {
+  islogged = false;
+
+  constructor(public auth: Auth, public router:Router,  private jwtHelper: JwtHelperService) {
+
     this.db = getFirestore();
     initializeApp(environment.firebase);
     onAuthStateChanged(this.auth, (user) => {
       this.user = user;
     });
+
   }
+  
 
   getCurrentUser(): User | null {
     return this.user;
@@ -89,10 +95,13 @@ export class FirebaseService {
   }
 
   login({ email, password }: any) {
+    
     return signInWithEmailAndPassword(this.auth, email, password);
+    
   }
 
   logout() {
+    this.islogged = false;
     return signOut(this.auth);
   }
 

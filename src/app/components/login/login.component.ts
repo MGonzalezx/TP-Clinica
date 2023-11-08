@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
+        
         this.router.navigate(['/homeAdmin']);
       } else {
         
@@ -55,6 +56,7 @@ export class LoginComponent implements OnInit {
                 showConfirmButton: false,
                 timer: 1500,
               });
+              
               this.router.navigate(['/home']);
             }
           } else if (especialista.verificado === 'null') {
@@ -75,6 +77,7 @@ export class LoginComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500,
             });
+            
             this.router.navigate(['/home']);
           } else if (especialista.verificado === 'false') {
             await this.authService.logout();
@@ -94,6 +97,7 @@ export class LoginComponent implements OnInit {
           }
         } else {
           if (user.user.emailVerified) {
+           
             Swal.fire({
               icon: 'success',
               title: 'Inicio de sesión exitoso',
@@ -101,6 +105,8 @@ export class LoginComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500,
             });
+            
+            
             this.router.navigate(['/home']);
           } else {
            

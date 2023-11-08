@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterAdministradorComponent } from 'src/app/components/register-administrador/register-administrador.component';
 import { AdministradorComponent } from './administrador/administrador.component';
 import { AdministrarEspecialistasComponent } from './administrar-especialistas/administrar-especialistas.component';
+import { authGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'admin', pathMatch: 'full' },
@@ -10,10 +11,11 @@ const routes: Routes = [
     path: 'admin',
     component: AdministradorComponent,
   },
-  { path: 'registerAdmin', component: RegisterAdministradorComponent, pathMatch: 'full' },
+  { 
+    path: 'registerAdmin', component: RegisterAdministradorComponent, 
+  },
   {
-    path: 'administrar-especialistas',
-    component: AdministrarEspecialistasComponent, pathMatch: 'full'
+    path: 'administrar-especialistas',component: AdministrarEspecialistasComponent,
   },
 ];
 

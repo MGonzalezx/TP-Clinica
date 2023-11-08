@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 import { NgbCollapseModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
 import { LoginComponent } from './components/login/login.component';
@@ -20,6 +20,11 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterModule } from './modules/register/register.module';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+
+// Providers
+import { JwtHelperService, JWT_OPTIONS }  from '@auth0/angular-jwt'
+import { TokenInterceptorService } from './services/token-interceptor.service';
+//import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -32,6 +37,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    //AngularFireModule.initializeApp(environment.firebase), 
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
@@ -44,7 +50,13 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     RegisterModule
     
   ],
-  providers: [],
+  providers: [
+    // JWT
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    // Token interceptor
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

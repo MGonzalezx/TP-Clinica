@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Especialista } from 'src/app/clases/especialista';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 @Component({
   selector: 'app-administrar-especialistas',
   templateUrl: './administrar-especialistas.component.html',
@@ -8,13 +9,30 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class AdministrarEspecialistasComponent {
   especialistas: Especialista[] = [];
-
+  seLogueoAdmin:boolean = false;
   constructor(
     private authService: FirebaseService,
   ) {}
 
   ngOnInit(): void {
     this.cargarEspecialistas();
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+    
+        const uid = user.uid;
+        console.log(uid);
+        const admin =  this.authService.getAdminByUid(uid);
+        if(admin != null){
+          this.seLogueoAdmin = true;
+          console.log(admin);
+          
+        }
+    
+      } else {
+      
+      }
+   });
   }
 
   async cargarEspecialistas() {

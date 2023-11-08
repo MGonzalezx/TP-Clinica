@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
+  constructor(private authService: FirebaseService){
+
+  }
+
+  ngOnInit(): void {
+
+   
+  }
 }
