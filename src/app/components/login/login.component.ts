@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   form!: FormGroup;
   checkError: boolean = false;
   errorMessage: string = '';
- 
+  public reenvioEmail:boolean = false;
 
   constructor(private authService: FirebaseService, private router: Router) {
   }
@@ -87,8 +87,8 @@ export class LoginComponent implements OnInit {
           } else {
             Swal.fire({
               icon: 'warning',
-              title: 'Verifique su email',
-              text: 'Por favor, verifique su correo electrónico para continuar.',
+              title: 'Su cuenta aun no ha sido aprobada',
+              text: 'Por favor, comuniquese con administración.',
               timer: 4000,
             });
           }
@@ -103,13 +103,28 @@ export class LoginComponent implements OnInit {
             });
             this.router.navigate(['/home']);
           } else {
-            await this.authService.logout();
-            Swal.fire({
-              icon: 'warning',
-              title: 'Verifique su email',
-              text: 'Por favor, verifique su correo electrónico para continuar.',
-              timer: 4000,
+           
+            this.mostrarAlertaConfirmacionEmail('Email sin verificar','Verificación','Verifique su casilla de mail para verificar la cuenta').then(()=>{
+              if(this.reenvioEmail){
+    
+                this.authService.sendEmailVerification();
+                this.authService.logout();
+                console.log("deslogueado");
+              }
+              else{
+                this.router.navigate(['/login']);
+                this.authService.logout();
+                console.log("deslogueado");
+              }
+              
             });
+           
+            // Swal.fire({
+            //   icon: 'warning',
+            //   title: 'Verifique su email',
+            //   text: 'Por favor, verifique su correo electrónico para continuar.',
+            //   timer: 4000,
+            // });
           }
         }
       }
@@ -121,6 +136,32 @@ export class LoginComponent implements OnInit {
         timer: 4000,
       });
     }
+  }
+
+  async mostrarAlertaConfirmacionEmail(mensaje:string,titulo:string,mensajeConfirmed:string){
+    const result = await Swal.fire({
+      title: titulo,
+      text: mensaje,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Reenviar email de verificación'
+    });
+    
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Enviado!',
+        mensajeConfirmed,
+        'success'
+      );
+      this.reenvioEmail = true;
+    }
+    else {
+      this.reenvioEmail = false;
+
+    }
+    return result;
   }
   
   async onSubmit() {
@@ -160,7 +201,7 @@ export class LoginComponent implements OnInit {
     
   }
   completarDrOscar(){
-    this.form.controls['email'].setValue('dr.balsano@gmail.com');
+    this.form.controls['email'].setValue('halaki5955@glalen.com');
     this.form.controls['password'].setValue('oscar1234');
   }
   completarDrRobotnik(){
@@ -169,7 +210,7 @@ export class LoginComponent implements OnInit {
   }
 
   completarPacienteA(){
-    this.form.controls['email'].setValue('paciente_a@gmail.com');
+    this.form.controls['email'].setValue('cogav28669@jucatyo.com');
     this.form.controls['password'].setValue('test123');
    
   }

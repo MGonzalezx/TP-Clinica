@@ -29,7 +29,7 @@ import Swal from 'sweetalert2';
 import { Admin } from '../clases/admin';
 import { Paciente } from '../clases/paciente';
 import { Especialista } from '../clases/especialista';
-
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +39,7 @@ export class FirebaseService {
 
   user: User | null = null;
 
-  constructor(public auth: Auth) {
+  constructor(public auth: Auth, public router:Router) {
     this.db = getFirestore();
     initializeApp(environment.firebase);
     onAuthStateChanged(this.auth, (user) => {
@@ -94,6 +94,12 @@ export class FirebaseService {
 
   logout() {
     return signOut(this.auth);
+  }
+
+  async sendEmailVerification() {
+    const user = this.getCurrentUser()!;
+    await (sendEmailVerification(user));
+    this.router.navigate(['/']);
   }
 
   public async guardarAdminBD(admin: Admin) {

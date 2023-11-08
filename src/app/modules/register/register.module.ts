@@ -6,6 +6,8 @@ import { RegisterEspecialistaComponent } from 'src/app/components/register-espec
 import { RegisterPacienteComponent } from 'src/app/components/register-paciente/register-paciente.component';
 import { RegisterAdministradorComponent } from 'src/app/components/register-administrador/register-administrador.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsuariosModule } from '../usuarios/usuarios.module';
+
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RegisterRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-  ],
+    UsuariosModule
+  ],exports:[RegisterAdministradorComponent]
 })
 export class RegisterModule {}

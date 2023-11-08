@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-
+  
+  mostrarRegistroPacientes: boolean = false;
+  mostrarRegistroEspecialistas: boolean = false;
+  mostrarRegistroPaciente() {
+    this.mostrarRegistroPacientes = true;
+    this.mostrarRegistroEspecialistas = false;
+  }
+  mostrarRegistroEspecialista() {
+    this.mostrarRegistroEspecialistas = true;
+    this.mostrarRegistroPacientes = false;
+  }
 }
