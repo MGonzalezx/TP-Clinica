@@ -55,6 +55,7 @@ export class RegisterEspecialistaComponent {
         Validators.minLength(6),
       ]),
       fotoespecialista: new FormControl(''),
+      recaptchaReactive: new FormControl(null, Validators.required),
     });
 
     this.cargarEspecialidades();
@@ -175,5 +176,7 @@ export class RegisterEspecialistaComponent {
         timer: 4000,
       });
     }
+  }
+  resolved(captchaResponse: string) {
   }
 }
