@@ -5,16 +5,22 @@ import { MisTurnosComponent } from './mis-turnos/mis-turnos.component';
 import { TurnosEspecialistaComponent } from 'src/app/modules/turnos/turnos-especialista/turnos-especialista.component';
 import { TurnosPacienteComponent } from 'src/app/modules/turnos/turnos-paciente/turnos-paciente.component';
 import { SolicitarTurnoComponent } from 'src/app/components/solicitar-turno/solicitar-turno.component';
+import { ListadoDiasTurnoComponent } from './listado-dias-turno/listado-dias-turno.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     MisTurnosComponent,
     TurnosEspecialistaComponent,
     TurnosPacienteComponent,
-    SolicitarTurnoComponent,
+    SolicitarTurnoComponent,    
+    ListadoDiasTurnoComponent,
   ],
   imports: [
     CommonModule,
-    TurnosRoutingModule
+    TurnosRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class TurnosModule { }

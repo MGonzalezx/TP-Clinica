@@ -174,6 +174,7 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       try {
         let user = await this.authService.login(this.form.value);
+        localStorage.setItem('logueado', user.user.uid);
         await this.verificarMails(user);
       } catch (error: any) {
         this.checkError = true;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { FirebaseService } from 'src/app/services/firebase.service';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,12 +8,26 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private authService: FirebaseService){
-
-  }
+  seLogueoAdmin:boolean = false;
+  constructor(private authService: FirebaseService) {}
 
   ngOnInit(): void {
-
-   
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+    
+        const uid = user.uid;
+        console.log(uid);
+        const admin =  this.authService.getAdminByUid(uid);
+        if(admin != null){
+          this.seLogueoAdmin = true;
+          console.log(admin);
+          
+        }
+    
+      } else {
+      
+      }
+   });
   }
 }

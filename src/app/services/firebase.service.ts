@@ -17,6 +17,7 @@ import {
   collectionData,
   doc,
   getDocs,
+  getDoc,
   getFirestore,
   orderBy,
   query,
@@ -29,6 +30,7 @@ import Swal from 'sweetalert2';
 import { Admin } from '../clases/admin';
 import { Paciente } from '../clases/paciente';
 import { Especialista } from '../clases/especialista';
+import { Turno } from '../clases/turno';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
@@ -105,6 +107,8 @@ export class FirebaseService {
     return signOut(this.auth);
   }
 
+ 
+
   async sendEmailVerification() {
     const user = this.getCurrentUser()!;
     await (sendEmailVerification(user));
@@ -171,7 +175,7 @@ export class FirebaseService {
 
 
 
-  async getAdminByUid(uid: string): Promise<Admin | null> {
+  async getAdminByUid(uid: string | undefined): Promise<Admin | null> {
     try {
       const q = query(collection(this.db, 'admins'), where('uid', '==', uid));
       const querySnapshot = await getDocs(q);
@@ -271,7 +275,7 @@ export class FirebaseService {
         especialistaData['apellido'],
         especialistaData['edad'],
         especialistaData['dni'],
-        especialistaData['especialidad'],
+        especialistaData['especialidades'],
         especialistaData['foto1'],
         especialistaData['verificado'],
       );
@@ -351,5 +355,64 @@ export class FirebaseService {
     }
   }  
 
+  save(data: any, path: string) {
+    const col = collection(this.db, path);
+    return addDoc(col, { ...data });
+  }
+
+  get(path: string) {
+    const col = collection(this.db, path);
+    const observable = collectionData(col);
+
+    return observable;
+  }
+
+  getDocument(path: string, documentId: string) {
+    const documentRef = doc(this.db, path, documentId);
+    return getDoc(documentRef);
+  }
+
+  public async guardarTurno(turno: Turno) {
+    try {
+      const docRef = await addDoc(collection(this.db, 'turnos'), {
+        especialidad: turno.idEspecialidad,
+        especialista: turno.idEspecialista,
+        paciente: turno.idPaciente,
+        estado: turno.estado,
+        fecha: turno.fecha,
+        hora: turno.hora,
+      });
+      console.log('Document written with ID: ', docRef.id);
+      return true;
+    } catch (e) {
+      console.error('Error adding document: ', e);
+      return false;
+    }
+  }
+
+  public async obtenerTurnos(especialistaId: string): Promise<Turno[]> {
+    const q = query(
+      collection(this.db, 'turnos'),
+      where('especialista', '==', especialistaId)
+    );
+    const querySnapshot = await getDocs(q);
+    const turnos: Turno[] = [];
+
+    querySnapshot.forEach((doc) => {
+      const turnoData = doc.data();
+      const turno = new Turno(
+        doc.id,
+        turnoData['especialidad'],
+        turnoData['especialista'],
+        turnoData['paciente'],
+        turnoData['estado'],
+        turnoData['fecha'],
+        turnoData['hora']
+      );
+      turnos.push(turno);
+    });
+
+    return turnos;
+  }
  
 }

@@ -5,7 +5,7 @@ import { AdministradorComponent } from './administrador/administrador.component'
 import { AdministrarEspecialistasComponent } from './administrar-especialistas/administrar-especialistas.component';
 import { AdministrarTurnosComponent } from './administrar-turnos/administrar-turnos.component';
 import { SolicitarTurnoComponent } from 'src/app/components/solicitar-turno/solicitar-turno.component';
-
+import { MiPerfilComponent } from 'src/app/components/mi-perfil/mi-perfil.component';
 import { authGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
@@ -22,6 +22,7 @@ const routes: Routes = [
   },
   { path: 'administrar-turnos', component: AdministrarTurnosComponent },
   { path: 'solicitar-turno', component: SolicitarTurnoComponent },
+  { path: 'perfil', component: MiPerfilComponent },
 ];
 
 @NgModule({

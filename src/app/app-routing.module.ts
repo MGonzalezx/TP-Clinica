@@ -4,6 +4,7 @@ import { BienvenidaComponent } from './components/bienvenida/bienvenida.componen
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { authGuard } from './guards/auth.guard';
+import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 //import { adminGuard } from './guards/admin.guard copy';
 
 const routes: Routes = [
@@ -11,7 +12,8 @@ const routes: Routes = [
   { path: '', redirectTo: '/bienvenida', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent, canActivate:[authGuard], children:[
-    { path: 'turnos', loadChildren: () => import('./modules/turnos/turnos.module').then(m => m.TurnosModule) }
+    { path: 'turnos', loadChildren: () => import('./modules/turnos/turnos.module').then(m => m.TurnosModule) },
+    { path: 'perfil', component: MiPerfilComponent },
   ] },  
   { path: 'homeAdmin', loadChildren: () => import('./modules/usuarios/usuarios.module').then(m => m.UsuariosModule), canActivate:[authGuard] },
   { path: 'register', loadChildren: () => import('./modules/register/register.module').then(m => m.RegisterModule)},
