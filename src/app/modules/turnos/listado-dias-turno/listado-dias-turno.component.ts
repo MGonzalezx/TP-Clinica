@@ -92,6 +92,10 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
       // Calcular los horarios disponibles para la 'mañana' y la 'tarde'
       const horariosManana = this.obtenerHorariosDisponibles('mañana');
       const horariosTarde = this.obtenerHorariosDisponibles('tarde');
+
+      //Verificar que no haya horarios ya pasados
+
+      
       const horariosPosibles = horariosManana.concat(horariosTarde);
 
       if (horariosPosibles.length == 0) {

@@ -117,7 +117,7 @@ export class RegisterEspecialistaComponent {
 
 
   onSubmit() {
-    const especialidadesSeleccionadas = this.especialidades.filter(especialidad => this.form.get(`especialidad_${especialidad.uid}`)?.value);
+    const especialidadesSeleccionadas = this.especialidades.filter(especialidades => this.form.get(`especialidad_${especialidades.uid}`)?.value);
     console.log(especialidadesSeleccionadas);
     if (this.form.valid) {
       this.cargarUsuario();
@@ -132,7 +132,7 @@ export class RegisterEspecialistaComponent {
 
   async cargarUsuario() {
     try {
-      const especialidadesSeleccionadas = this.especialidades.filter(especialidad => this.form.get(`especialidad_${especialidad.uid}`)?.value);
+      const especialidadesSeleccionadas = this.especialidades.filter(especialidades => this.form.get(`especialidad_${especialidades.uid}`)?.value);
       let data = {
         email: this.form.controls['especialistaEmail'].value,
         password: this.form.controls['especialistaClave'].value,
@@ -146,7 +146,7 @@ export class RegisterEspecialistaComponent {
         this.form.controls['especialistaApellido'].value,
         this.form.controls['especialistaEdad'].value,
         this.form.controls['especialistaDni'].value,
-        especialidadesSeleccionadas.map(especialidad => especialidad.uid),
+        especialidadesSeleccionadas.map(especialidades => especialidades.uid),
         this.imagenURL,
         'false'
       );

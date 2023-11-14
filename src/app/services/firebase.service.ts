@@ -162,7 +162,7 @@ export class FirebaseService {
         apellido: especialista.apellido,
         edad: especialista.edad,
         dni: especialista.dni,
-        especialidad: especialista.especialidades,
+        especialidades: especialista.especialidades,
         foto1: especialista.foto1,
         verificado:'false'
       });

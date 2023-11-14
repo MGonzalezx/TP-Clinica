@@ -9,14 +9,13 @@ import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 
 const routes: Routes = [
   { path: 'bienvenida', component: BienvenidaComponent},
-  { path: '', redirectTo: '/bienvenida', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent, canActivate:[authGuard], children:[
-    { path: 'turnos', loadChildren: () => import('./modules/turnos/turnos.module').then(m => m.TurnosModule) },
-    { path: 'perfil', component: MiPerfilComponent },
-  ] },  
+  { path: 'home', component: HomeComponent},   
+  { path: 'turnos', loadChildren: () => import('./modules/turnos/turnos.module').then(m => m.TurnosModule) },
+  { path: 'perfil', component: MiPerfilComponent },
   { path: 'homeAdmin', loadChildren: () => import('./modules/usuarios/usuarios.module').then(m => m.UsuariosModule), canActivate:[authGuard] },
   { path: 'register', loadChildren: () => import('./modules/register/register.module').then(m => m.RegisterModule)},
+  { path: '', redirectTo: '/bienvenida', pathMatch: 'full' },
 ];
 
 @NgModule({

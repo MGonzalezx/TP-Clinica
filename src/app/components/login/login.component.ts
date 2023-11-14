@@ -212,7 +212,7 @@ export class LoginComponent implements OnInit {
     this.form.controls['password'].setValue('oscar1234');
   }
   completarDrRobotnik(){
-    this.form.controls['email'].setValue('drrobotnike@gmail.com');
+    this.form.controls['email'].setValue('debar77718@mainmile.com');
     this.form.controls['password'].setValue('robo1234');
   }
 

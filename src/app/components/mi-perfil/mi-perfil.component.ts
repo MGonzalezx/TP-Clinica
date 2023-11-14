@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Admin } from 'src/app/clases/admin';
-import { Especialista } from 'src/app/clases/especialista';
-import { Paciente } from 'src/app/clases/paciente';
 import { Horario } from 'src/app/clases/horario';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -18,9 +15,11 @@ export class MiPerfilComponent implements OnInit {
   mostrarHorarios = false;
   estadoInicialHorarios: any;
 
+
   constructor(private authService: FirebaseService) {}
 
   ngOnInit(): void {
+    console.log('hace algo');
     this.user();
     this.identidad = localStorage.getItem('identidad');
   }
@@ -42,13 +41,15 @@ export class MiPerfilComponent implements OnInit {
     );    
   this.estadoInicialHorarios = {...this.horario};
   }
-
+  
   sonIguales(obj1: any, obj2: any) {
     return JSON.stringify(obj1) === JSON.stringify(obj2);
   }
-
+  
   async user() {
     let user = localStorage.getItem('logueado');
+    
+    
     if (user) {
       const especialista = await this.authService.getEspecialistasByUid(user);
       if (especialista) {
@@ -89,6 +90,7 @@ export class MiPerfilComponent implements OnInit {
         );
 
         this.estadoInicialHorarios = {...this.horario};
+
         localStorage.setItem('identidad', 'especialista');
       } else {
         const paciente = await this.authService.getPacientesByUid(user);
