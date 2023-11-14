@@ -8,14 +8,14 @@ import { RegisterAdministradorComponent } from 'src/app/components/register-admi
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsuariosModule } from '../usuarios/usuarios.module';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
-
+import { MiDirectivaColorDirective } from 'src/app/mi-directiva-color.directive';
 @NgModule({
   declarations: [
     RegisterComponent,
     RegisterEspecialistaComponent,
     RegisterPacienteComponent,
     RegisterAdministradorComponent,
-    
+    MiDirectivaColorDirective,
   ],
   imports: [
     CommonModule,

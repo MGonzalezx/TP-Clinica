@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { Especialista } from 'src/app/clases/especialista';
 import { Turno } from 'src/app/clases/turno';
 import { FirebaseService } from 'src/app/services/firebase.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-listado-dias-turno',
   templateUrl: './listado-dias-turno.component.html',
@@ -32,6 +32,12 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
       );
     }
     this.diasDisponibles = await this.obtenerDiasDisponibles();
+    if (this.diasDisponibles.length == 0) {
+      this.turnoSeleccionado.emit({
+        dia: new Date(),
+        hora: '',
+      });
+    }
     this.loading = false;
   }
 
@@ -87,6 +93,10 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
       const horariosManana = this.obtenerHorariosDisponibles('mañana');
       const horariosTarde = this.obtenerHorariosDisponibles('tarde');
       const horariosPosibles = horariosManana.concat(horariosTarde);
+
+      if (horariosPosibles.length == 0) {
+        return [];
+      }
 
     for (let i = 0; i < 15; i++) {
       const dia = new Date(today);
@@ -144,6 +154,7 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
     });
   }
 
+  /// MAÑANA 8 A 13 HS Y TARDE 14 A 19 HS
   obtenerHorariosDisponibles(periodo: string): string[] {
     let horariosDisponibles: string[] = [];
     if (this.especialistaData && this.especialistaData.turnos) {
@@ -152,15 +163,17 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
       );
       if (turnoEspecialista && turnoEspecialista.turno === periodo) {
         if (periodo === 'mañana') {
-          horariosDisponibles = Array.from({ length: 5 }, (_, index) => {
-            const hora = 9 + index;
+          horariosDisponibles = Array.from({ length: 6 }, (_, index) => {
+            const hora = 8 + index;
             return `${hora}:00`;
           });
         } else if (periodo === 'tarde') {
-          horariosDisponibles = Array.from({ length: 5 }, (_, index) => {
+          horariosDisponibles = Array.from({ length: 6 }, (_, index) => {
             const hora = 14 + index;
             return `${hora}:00`;
           });
+        }else{
+          return [];
         }
       }
     }

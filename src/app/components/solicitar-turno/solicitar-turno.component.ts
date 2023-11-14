@@ -34,13 +34,19 @@ export class SolicitarTurnoComponent implements OnInit {
   esAdmin: boolean = false;
   fechaObtenida: boolean = false;
   especialista: string | undefined = undefined;
+  especialistaFalso:boolean = false;
 
-  constructor(private authService: FirebaseService, private router: Router, private cdr: ChangeDetectorRef) {}
-  ngOnInit(): void {
+  constructor(private authService: FirebaseService, private router: Router, private cdr: ChangeDetectorRef) 
+  {
+
+  }
+
+
+  async ngOnInit(): Promise<void> {
     this.form = new FormGroup({
       especialidad: new FormControl('', [Validators.required]),
       especialista: new FormControl('', [Validators.required]),
-      paciente: new FormControl('', [Validators.required]),
+      paciente: new FormControl('', this.esAdmin ? [Validators.required] : []),
       hora: new FormControl('', [Validators.required]),
       fecha: new FormControl('', [Validators.required]),
     });
@@ -48,7 +54,7 @@ export class SolicitarTurnoComponent implements OnInit {
     let id = localStorage.getItem('logueado');
     this.esAdmin = localStorage.getItem('admin') === 'true';
     if (id) {
-      let admin = this.authService.getAdminByUid(id);
+      let admin = await this.authService.getAdminByUid(id);
       if (admin != null) {
         this.esAdmin = true;
         this.cargarPacientes();
@@ -65,7 +71,6 @@ export class SolicitarTurnoComponent implements OnInit {
   }
 
   onEspecialistaChange(event: any) {
-    console.log("Pasa algo");
     this.especialista = undefined;
     this.especialista = this.form.controls['especialista'].value;
     this.fechaObtenida = false;    
@@ -129,7 +134,17 @@ export class SolicitarTurnoComponent implements OnInit {
   }
 
   onTurnoSeleccionado(turno: { dia: Date; hora: string }) {
-   
+     if(turno.hora == ''){
+      this.fechaObtenida = false;
+      this.especialista = undefined;
+      this.especialistaFalso =  true;
+      Swal.fire({
+        icon: 'error',
+        title: 'Error, el especialista no tiene horarios cargados...',
+        timer: 2500,
+      })
+      return;
+    }
     const fechaSeleccionada: Date = turno.dia;
     const horaSeleccionada: string = turno.hora;
     const fechaCompleta: Date = new Date(
@@ -143,10 +158,42 @@ export class SolicitarTurnoComponent implements OnInit {
     this.form.controls['fecha'].setValue(fechaCompleta);
     this.form.controls['hora'].setValue(horaSeleccionada);
     this.fechaObtenida = true;
+     // Formatear la fecha y la hora
+     const fechaFormateada = fechaCompleta.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+    const horaFormateada = fechaCompleta.toLocaleTimeString('es-ES', {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+
+    Swal.fire({
+      icon: 'warning',
+      text:
+        'La fecha seleccionada es ' +
+        fechaFormateada +
+        ' y la hora es ' +
+        horaFormateada,
+      title: '¡Fecha!',
+      showConfirmButton: false,
+      timer: 2000,
+    });
   }
-  onSubmit() {
-    if (this.form.valid) {
-      this.cargarTurno();
+
+  async onSubmit() {
+    if (this.form.valid && this.especialistaFalso == false) {
+      let paciente = localStorage.getItem('logueado');
+      if (this.esAdmin) {
+        paciente = this.form.controls['paciente'].value;
+      }
+      if (paciente) {
+        const puedeCargarTurno = await this.validarTurno(paciente);
+        if (puedeCargarTurno) {
+          this.cargarTurno(paciente);
+        }
+      }
     } else {
       Swal.fire({
         icon: 'error',
@@ -156,26 +203,53 @@ export class SolicitarTurnoComponent implements OnInit {
     }
   }
 
-  async cargarTurno() {
+  async validarTurno(pacienteId: string) {
+    const especialidad = this.form.controls['especialidad'].value;
+
+    const turnosDelPaciente = await this.authService.obtenerTurnosDelPaciente(
+      pacienteId
+    );
+
+    const turnosEnLaMismaEspecialidad = turnosDelPaciente.filter(
+      (turno) => turno.idEspecialidad == especialidad
+    );
+
+    if (turnosEnLaMismaEspecialidad.length > 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'El paciente ya tiene un turno en esta especialidad.',
+        timer: 2500,
+      });
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  async cargarTurno(paciente: string) {
     try {
       let turno = new Turno(
         '',
         this.form.controls['especialista'].value,
         this.form.controls['especialidad'].value,
-        this.form.controls['paciente'].value,
+        paciente,
         'espera',
         this.form.controls['fecha'].value,
         this.form.controls['hora'].value
       );
       await this.authService.guardarTurno(turno);
-
       Swal.fire({
         icon: 'success',
-        title: 'El especialista aceptará o rechazará el turno',
-        text: '¡Turno Solicitado!',
+        text: 'debera esperar que el especialista acepte!',
+        title: '¡Turno solicitado!',
         showConfirmButton: false,
         timer: 1500,
       });
+      this.form.reset();
+      this.especialista = undefined;
+      this.fechaObtenida = false;
+      
     } catch (error: any) {
       Swal.fire({
         icon: 'error',
