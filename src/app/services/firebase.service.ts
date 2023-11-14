@@ -33,6 +33,7 @@ import { Especialista } from '../clases/especialista';
 import { Turno } from '../clases/turno';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Horario } from '../clases/horario';
 @Injectable({
   providedIn: 'root'
 })
@@ -279,6 +280,7 @@ export class FirebaseService {
         especialistaData['foto1'],
         especialistaData['verificado'],
       );
+      especialista.turnos = especialistaData['turnos'];
       return especialista;
     } catch (error) {
       console.error('Error al buscar el especialista por UID: ', error);
@@ -336,6 +338,27 @@ export class FirebaseService {
   
     } catch (error) {
       console.error('Error al actualizar el campo verificado del especialista: ', error);
+      throw error;
+    }
+  }
+
+  async actualizarHorariosEspecialista(uid: string, turnos: Horario[]): Promise<void> {
+    try {
+      const especialistasCollection = collection(this.db, 'especialistas');
+      const querys = query(especialistasCollection, where('uid', '==', uid));
+      const querySnapshot = await getDocs(querys);
+
+      if (querySnapshot.size === 0) {
+        console.log('No se encontró ningún especialista con el UID interno proporcionado');
+        return;
+      }
+
+      querySnapshot.forEach((docSnapshot) => {
+        const especialistaRef = doc(this.db, 'especialistas', docSnapshot.id);
+        updateDoc(especialistaRef, { turnos: turnos });
+      });
+    } catch (error) {
+      console.error('Error al actualizar los horarios del especialista: ', error);
       throw error;
     }
   }

@@ -12,22 +12,5 @@ export class HomeComponent implements OnInit {
   constructor(private authService: FirebaseService) {}
 
   ngOnInit(): void {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-    
-        const uid = user.uid;
-        console.log(uid);
-        const admin =  this.authService.getAdminByUid(uid);
-        if(admin != null){
-          this.seLogueoAdmin = true;
-          console.log(admin);
-          
-        }
-    
-      } else {
-      
-      }
-   });
   }
 }
