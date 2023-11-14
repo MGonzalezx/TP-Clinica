@@ -1,47 +1,53 @@
 <main class="contenedor">
-    <div class="registro-buttons">
-      <button
-        class="btn"
-        (click)="mostrarRegistroPaciente()"
-        [class.active]="mostrarRegistroPacientes"
-      >
-        <img src="../../../assets/logoPac.png" alt="" width="150" height="130" />
-        <br>
-        <small>Paciente</small>
-      </button>
-      <button
-        class="btn"
-        (click)="mostrarRegistroEspecialista()"
-        [class.active]="mostrarRegistroEspecialistas"
-      >
-        <img src="../../../assets/logoDoc.jpg" alt="" width="150" height="130" />
-        <br>
-        <small>Especialista</small>
-      </button>
-
-      <button
+  <div class="registro-buttons">
+    <button
+      class="btn"
+      (click)="mostrarRegistroPaciente()"
+      [class.active]="mostrarRegistroPacientes"
+    >
+      <img src="../../../assets/logoPac.png" alt="" width="150" height="130" />
+      <br />
+      <small>Paciente</small>
+    </button>
+    <br>
+    <button
+      class="btn"
+      (click)="mostrarRegistroEspecialista()"
+      [class.active]="mostrarRegistroEspecialistas"
+    >
+      <img src="../../../assets/logoDoc.jpg" alt="" width="150" height="130" />
+      <br />
+      <small>Especialista</small>
+    </button>
+    <br>
+    <button
       class="btn"
       (click)="mostrarRegistroAdministrador()"
       [class.active]="mostrarRegistroAdministradores"
       *ngIf="seLogueoAdmin"
     >
-      <img src="../../../assets/logoAdmin.png" alt="" width="150" height="130" />
-      <br>
+      <img
+        src="../../../assets/logoAdmin.png"
+        alt=""
+        width="150"
+        height="130"
+      />
+      <br />
       <small>Administrador</small>
     </button>
-    </div>
-  
-    <div class="registro-form">
-      <div *ngIf="mostrarRegistroPacientes">
-        <app-register-paciente></app-register-paciente>
-      </div>
-  
-      <div *ngIf="mostrarRegistroEspecialistas">
-        <app-register-especialista></app-register-especialista>
-      </div>
+  </div>
 
-      <div *ngIf="mostrarRegistroAdministradores">
-        <app-register-administrador></app-register-administrador>
-      </div>
+  <div class="registro-form">
+    <div *ngIf="mostrarRegistroPacientes">
+      <app-register-paciente></app-register-paciente>
     </div>
-  </main>
+
+    <div *ngIf="mostrarRegistroEspecialistas">
+      <app-register-especialista></app-register-especialista>
+    </div>
+
+    <div *ngIf="mostrarRegistroAdministradores">
+      <app-register-administrador></app-register-administrador>
+    </div>
+  </div>
+</main>
