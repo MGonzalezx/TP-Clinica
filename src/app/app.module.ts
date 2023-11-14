@@ -24,6 +24,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 // Providers
 import { JwtHelperService, JWT_OPTIONS }  from '@auth0/angular-jwt'
 import { TokenInterceptorService } from './services/token-interceptor.service';
+import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
+//import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
 //import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
@@ -33,6 +35,8 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
     LoginComponent,
     HomeComponent,
     NavbarComponent,
+    MiPerfilComponent,
+    //SolicitarTurnoComponent,
   ],
   imports: [
     BrowserModule,

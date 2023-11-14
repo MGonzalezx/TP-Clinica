@@ -5,6 +5,7 @@ import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { AdministradorComponent } from './administrador/administrador.component';
 import { AdministrarEspecialistasComponent } from './administrar-especialistas/administrar-especialistas.component';
 import { NavbarAdmComponent } from './navbar-adm/navbar-adm.component';
+import { AdministrarTurnosComponent } from './administrar-turnos/administrar-turnos.component';
 //import { RegisterModule } from '../register/register.module';
 
 
@@ -12,7 +13,8 @@ import { NavbarAdmComponent } from './navbar-adm/navbar-adm.component';
   declarations: [
     AdministradorComponent,
     AdministrarEspecialistasComponent,
-    NavbarAdmComponent
+    NavbarAdmComponent,
+    AdministrarTurnosComponent
   ],
   imports: [
     CommonModule,

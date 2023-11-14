@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterAdministradorComponent } from 'src/app/components/register-administrador/register-administrador.component';
 import { AdministradorComponent } from './administrador/administrador.component';
 import { AdministrarEspecialistasComponent } from './administrar-especialistas/administrar-especialistas.component';
+import { AdministrarTurnosComponent } from './administrar-turnos/administrar-turnos.component';
+import { SolicitarTurnoComponent } from 'src/app/components/solicitar-turno/solicitar-turno.component';
+
 import { authGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
@@ -17,6 +20,8 @@ const routes: Routes = [
   {
     path: 'administrar-especialistas',component: AdministrarEspecialistasComponent,
   },
+  { path: 'administrar-turnos', component: AdministrarTurnosComponent },
+  { path: 'solicitar-turno', component: SolicitarTurnoComponent },
 ];
 
 @NgModule({

@@ -157,7 +157,7 @@ export class FirebaseService {
         apellido: especialista.apellido,
         edad: especialista.edad,
         dni: especialista.dni,
-        especialidad: especialista.especialidad,
+        especialidad: especialista.especialidades,
         foto1: especialista.foto1,
         verificado:'false'
       });
@@ -193,6 +193,65 @@ export class FirebaseService {
     } catch (error) {
       console.error('Error al buscar el administrador por UID: ', error);
       return null;
+    }
+  }
+
+  async getPacientesByUid(uid: string): Promise<Paciente | null> {
+    try {
+      const q = query(
+        collection(this.db, 'pacientes'),
+        where('uid', '==', uid)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.size === 0) {
+        console.log('No se encontró ningún paciente con el UID proporcionado');
+        return null;
+      }
+      const pacienteData = querySnapshot.docs[0].data();
+      const paciente = new Paciente(
+        pacienteData['uid'],
+        pacienteData['nombre'],
+        pacienteData['apellido'],
+        pacienteData['edad'],
+        pacienteData['dni'],
+        pacienteData['obraSocial'],
+        pacienteData['foto1'],
+        pacienteData['foto2']
+      );
+      return paciente;
+    } catch (error) {
+      console.error('Error al buscar el paciente por UID: ', error);
+      return null;
+    }
+  }
+
+  async getAllPacientes(): Promise<Paciente[]> {
+    try {
+      const q = query(collection(this.db, 'pacientes'));
+      const querySnapshot = await getDocs(q);
+
+      const pacientes: Paciente[] = [];
+
+      querySnapshot.forEach((doc) => {
+        const pacienteData = doc.data();
+        const paciente = new Paciente(
+          pacienteData['uid'],
+          pacienteData['nombre'],
+          pacienteData['apellido'],
+          pacienteData['edad'],
+          pacienteData['dni'],
+          pacienteData['obraSocial'],
+          pacienteData['foto1'],
+          pacienteData['foto2']
+        );
+        pacientes.push(paciente);
+      });
+
+      return pacientes;
+    } catch (error) {
+      console.error('Error al obtener todos los pacientes: ', error);
+      return [];
     }
   }
 
