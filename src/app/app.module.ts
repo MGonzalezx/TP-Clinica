@@ -25,8 +25,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { JwtHelperService, JWT_OPTIONS }  from '@auth0/angular-jwt'
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //import { SolicitarTurnoComponent } from './components/solicitar-turno/solicitar-turno.component';
 //import { AngularFireModule } from '@angular/fire/compat';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RegisterModule
+    RegisterModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule
     
   ],
   providers: [

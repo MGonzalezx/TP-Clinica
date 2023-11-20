@@ -1,231 +1,246 @@
-h1{
-    color: cornflowerblue;
+h1 {
+  color: cornflowerblue;
+}
+
+.test {
+  flex-direction: row;
+  background-color: rgb(65, 90, 138) !important;
+  padding: 2% 1% !important;
+  width: 30% !important;
+  margin: 1%;
+}
+
+.btn-redondo {
+  display: block;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  border: 1px solid rgb(0, 0, 0);
+  opacity: 0.8;
+  box-shadow: 0px 8px 15px rgb(45, 76, 133);
+}
+
+.test_A {
+  width: 170px;
+  height: 170px;
+  padding: 10px 16px;
+  border-radius: 100%;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.test:hover {
+  background-color: rgb(30, 64, 128) !important;
+}
+.borderFade {
+  padding-bottom: 1px;
+  color: hsl(222, 25%, 14%);
+  position: relative;
+}
+
+.borderFade::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transform: translateY(3px);
+  background: hsl(243, 80%, 62%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.borderFade:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.flag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cardLogueo {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-top: -25%;
+}
+.login-page {
+  width: 360px;
+  height: auto;
+  padding: 10% 0 0;
+  margin: auto;
+  animation-name: loginRegister;
+  animation-duration: 0.2s;
+}
+@keyframes loginRegister {
+  0% {
+    width: 0px;
+    opacity: 0;
+  }
+  100% {
+    width: 360px;
+    opacity: 1;
+  }
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 860px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+.form button {
+  font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: cornflowerblue;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.form button:hover,
+.form button:active,
+.form button:focus {
+  background: rgb(39, 73, 136);
+}
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+.form .message a {
+  color: rgb(1, 44, 124);
+  text-decoration: none;
+}
+.form .register-form {
+  display: none;
+}
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.container:before,
+.container:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.container .info {
+  margin: 50px auto;
+  text-align: center;
+}
+.container .info h1 {
+  margin: 0 0 15px;
+  padding: 0;
+  font-size: 36px;
+  font-weight: 300;
+  color: #1a1a1a;
+}
+.container .info span {
+  color: #4d4d4d;
+  font-size: 12px;
+}
+.container .info span a {
+  color: #000000;
+  text-decoration: none;
+}
+.container .info span .fa {
+  color: #ef3b3a;
+}
+body {
+  background: #76b852; /* fallback for old browsers */
+  background: -webkit-linear-gradient(right, #76b852, #8dc26f);
+  background: -moz-linear-gradient(right, #76b852, #8dc26f);
+  background: -o-linear-gradient(right, #76b852, #8dc26f);
+  background: linear-gradient(to left, #76b852, #8dc26f);
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media only screen and (min-width: 501px) {
+  /* For tablets: */
+  .login-page {
+    width: 50%;
+  }
+  .cardLogueo {
+    margin-top: -5%;
+    margin-left: 20%;
+  }
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  .cardLogueo {
+    margin-top: -30%;
+    margin-left: 1%;
+  }
+}
+@media only screen and (max-width: 500px) {
+  /* For mobile phones: */
+  .cardLogueo {
+    margin-top: -10%;
+    margin-left: 20%;
+  }
+  .register-page {
+    height: 500px;
+  }
+  .botones {
+    height: 800px;
+  }
+}
+
+.invalid {
+  color: red;
+}
+
+.fab-buttons {
+  float: right;
+  margin-right: 10px;
+ 
+  button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    width: 60px;
+    margin-bottom: 5px;
+    border: 1px solid black
   }
   
-  .test{
-    
-      flex-direction: row;
-      background-color: rgb(65, 90, 138) !important;
-      padding: 2% 1% !important;
-      width: 30% !important;
-      margin: 1%;
-    
-    }
-  
-    .btn-redondo {
-      display:block;
-      height: 150px;
-      width: 150px;
-      border-radius: 50%;  
-      border: 1px solid rgb(0, 0, 0);  
-      opacity: 0.8;
-      box-shadow: 0px 8px 15px rgb(45, 76, 133);  
-      
-    }
-  
-    .test_A{
-  
-      width: 170px;
-      height: 170px;
-      padding: 10px 16px;
-      border-radius: 100%;
-      font-size: 24px;
-      line-height: 1.33;
-     
-    
-    }
-  
-    .test:hover{
-      background-color: rgb(30, 64, 128) !important;
-    }
-    .borderFade {
-        padding-bottom: 1px;
-        color: hsl(222, 25%, 14%);
-        position: relative;
-    }
-    
-    .borderFade::after {
-        content: '';
-        position: absolute;
-        height: 2px;
-        width: 100%;
-        left: 0;
-        bottom: 0;
-        opacity: 0;
-        transform: translateY(3px);
-        background: hsl(243, 80%, 62%);
-        transition: opacity 0.2s ease, transform 0.2s ease;
-    }
-    
-    .borderFade:hover::after {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    
-    .flag{
-      display:flex;
-      justify-content: center;
-      align-items: center;
-      
-    }
-    .cardLogueo{
-      display:flex;
-      align-items: center;
-      flex-direction: row;
-      margin-top: -25%;
-    
-    }
-    .login-page {
-      width: 360px;
-      height: auto;
-      padding: 10% 0 0;
-      margin: auto;
-      animation-name: loginRegister;
-      animation-duration: 0.2s;
-      
-    }
-    @keyframes loginRegister {
-      0% {
-        width: 0px;
-        opacity: 0;
-      }
-      100% {
-        width: 360px;
-        opacity: 1;
-      }
-    }
-    .form {
-      position: relative;
-      z-index: 1;
-      background: #FFFFFF;
-      max-width: 860px;
-      margin: 0 auto 100px;
-      padding: 45px;
-      text-align: center;
-      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-    }
-    .form input {
-      font-family: "Roboto", sans-serif;
-      outline: 0;
-      background: #f2f2f2;
-      width: 100%;
-      border: 0;
-      margin: 0 0 15px;
-      padding: 15px;
-      box-sizing: border-box;
-      font-size: 14px;
-    }
-    .form button {
-      font-family: "Roboto", sans-serif;
-      text-transform: uppercase;
-      outline: 0;
-      background: cornflowerblue;
-      width: 100%;
-      border: 0;
-      padding: 15px;
-      color: #FFFFFF;
-      font-size: 14px;
-      -webkit-transition: all 0.3 ease;
-      transition: all 0.3 ease;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    .form button:hover,.form button:active,.form button:focus {
-      background: rgb(39, 73, 136);
-    }
-    .form .message {
-      margin: 15px 0 0;
-      color: #b3b3b3;
-      font-size: 12px;
-    }
-    .form .message a {
-      color: rgb(1, 44, 124);
-      text-decoration: none;
-    }
-    .form .register-form {
-      display: none;
-    }
-    .container {
-      position: relative;
-      z-index: 1;
-      max-width: 300px;
-      margin: 0 auto;
-    }
-    .container:before, .container:after {
-      content: "";
-      display: block;
-      clear: both;
-    }
-    .container .info {
-      margin: 50px auto;
-      text-align: center;
-    }
-    .container .info h1 {
-      margin: 0 0 15px;
-      padding: 0;
-      font-size: 36px;
-      font-weight: 300;
-      color: #1a1a1a;
-    }
-    .container .info span {
-      color: #4d4d4d;
-      font-size: 12px;
-    }
-    .container .info span a {
-      color: #000000;
-      text-decoration: none;
-    }
-    .container .info span .fa {
-      color: #EF3B3A;
-    }
-    body {
-      background: #76b852; /* fallback for old browsers */
-      background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-      background: -moz-linear-gradient(right, #76b852, #8DC26F);
-      background: -o-linear-gradient(right, #76b852, #8DC26F);
-      background: linear-gradient(to left, #76b852, #8DC26F);
-      font-family: "Roboto", sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;      
-    }
-    
-    @media only screen and (min-width: 501px) {
-      /* For tablets: */
-      .login-page {width: 50%;}
-      .cardLogueo{
-        margin-top: -5%;
-        margin-left: 20%;
-      }
-      
-    }
-    @media only screen and (min-width: 768px) {
-      /* For desktop: */
-      .cardLogueo{
-        
-        margin-top: -30%;
-        margin-left: 1%;
-      }
-      
-    }
-    @media only screen and (max-width:500px) {
-      /* For mobile phones: */
-      .cardLogueo{
-        margin-top: -10%;
-        margin-left: 20%;
-        
-    
-      }
-      .register-page {
-        height: 500px;
-        
-      }
-      .botones{
-        height: 800px;
-      }
-      
-    }
+}
 
-    .invalid{
-      color:red;
-      
-    }
+.example-button-container {
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+ul {
+  list-style-type: none;
+  
+}
