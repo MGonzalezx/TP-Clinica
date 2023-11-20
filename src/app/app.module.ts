@@ -32,6 +32,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +60,7 @@ import {MatDividerModule} from '@angular/material/divider';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
     
   ],
   providers: [

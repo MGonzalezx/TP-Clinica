@@ -9,10 +9,10 @@ export class MiDirectivaColorDirective {
 
   @Input() defaultColor = '';
 
-  @Input() appHighlight = '';
+  @Input() appMiDirectivaColor = '';
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.highlight(this.appHighlight || this.defaultColor || 'red');
+    this.highlight(this.appMiDirectivaColor || this.defaultColor);
   }
 
   @HostListener('mouseleave') onMouseLeave() {

@@ -5,12 +5,18 @@
     justify-content: center;
     align-content: center;
     min-height: 100vh;
+
+  }
+  
+  .botones{
+    clip-path: circle(35% at 50% 55%);
   }
   
   .btn{
   margin: 10px;
   color: #2E1F66  ;
-  background-color: #FE4A49 ;
+  background-color: transparent ;
+  clip-path: circle(35% at 50% 55%);
   }
   
   .form-signin {
@@ -41,3 +47,11 @@
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
+
+  span {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+ 

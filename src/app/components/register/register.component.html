@@ -1,40 +1,61 @@
 <main class="contenedor">
-  <div class="registro-buttons"  appMiDirectivaColor="blue">
-    <button
-      class="btn"
-      (click)="mostrarRegistroPaciente()"
-      [class.active]="mostrarRegistroPacientes"
-    >
-      <img src="../../../assets/logoPac.png" alt="" width="150" height="130" />
-      <br />
-      <small>Paciente</small>
-    </button>
-    <br>
-    <button
-      class="btn"
-      (click)="mostrarRegistroEspecialista()"
-      [class.active]="mostrarRegistroEspecialistas"
-    >
-      <img src="../../../assets/logoDoc.jpg" alt="" width="150" height="130" />
-      <br />
-      <small>Especialista</small>
-    </button>
-    <br>
-    <button
-      class="btn"
-      (click)="mostrarRegistroAdministrador()"
-      [class.active]="mostrarRegistroAdministradores"
-      *ngIf="seLogueoAdmin"
-    >
-      <img
-        src="../../../assets/logoAdmin.png"
-        alt=""
-        width="150"
-        height="130"
-      />
-      <br />
-      <small>Administrador</small>
-    </button>
+  <div class="registro-buttons">
+    <div class="botones" appMiDirectivaColor="yellow">
+      <button
+        class="btn"
+        (click)="mostrarRegistroPaciente()"
+        [class.active]="mostrarRegistroPacientes"
+      >
+        <img
+          src="../../../assets/logoPac.png"
+          alt=""
+          width="150"
+          height="130"
+        />
+      </button>
+    </div>
+
+    <br />
+    <span>Paciente</span>
+    <br />
+    <div class="botones" appMiDirectivaColor="yellow">
+      <button
+        class="btn"
+        (click)="mostrarRegistroEspecialista()"
+        [class.active]="mostrarRegistroEspecialistas"
+      >
+        <img
+          src="../../../assets/logoDoc.jpg"
+          alt=""
+          width="150"
+          height="130"
+        />
+        <br />
+      </button>
+    </div>
+
+    <br />
+    <span>Especialista</span>
+    <br />
+    <div class="botones" appMiDirectivaColor="yellow">
+      <button
+        class="btn"
+        (click)="mostrarRegistroAdministrador()"
+        [class.active]="mostrarRegistroAdministradores"
+        *ngIf="seLogueoAdmin"
+      >
+        <img
+          src="../../../assets/logoAdmin.png"
+          alt=""
+          width="150"
+          height="130"
+        />
+      </button>
+    </div>
+
+    <br />
+    <span>Administrador</span>
+    <br />
   </div>
 
   <div class="registro-form">
