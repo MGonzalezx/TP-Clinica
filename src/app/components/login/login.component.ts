@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   async verificarMails(user: any) {
     try {
-      const admin = await this.authService.getAdminByUid(user.user.uid);
+      const admin = await this.authService.getUserByUidAndType(user.user.uid,'admins');
 
       if (admin !== null) {
         Swal.fire({
@@ -42,8 +42,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/homeAdmin']);
       } else {
         
-        const especialista = await this.authService.getEspecialistasByUid(
-          user.user.uid
+        const especialista = await this.authService.getUserByUidAndType(
+          user.user.uid, 'especialistas'
         );
 
         if (especialista != null) {

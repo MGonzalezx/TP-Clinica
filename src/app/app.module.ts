@@ -42,6 +42,7 @@ import {MatDividerModule} from '@angular/material/divider';
     NavbarComponent,
     MiPerfilComponent,
     //SolicitarTurnoComponent,
+    
   ],
   imports: [
     BrowserModule,

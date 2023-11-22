@@ -20,6 +20,10 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
   selectedHour: string | undefined;
   periodos = ['mañana', 'tarde'];
 
+  activarDias: boolean = false;
+
+  diaSeleccionado: Date | undefined;
+
   constructor(private auth: FirebaseService) {
     
   }
@@ -27,9 +31,10 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
   async ngOnInit(): Promise<void> {
     this.loading = true;
     if (this.especialista) {
-      this.especialistaData = await this.auth.getEspecialistasByUid(
-        this.especialista
+      this.especialistaData = await this.auth.getUserByUidAndType(
+        this.especialista, 'especialistas'
       );
+      
     }
     this.diasDisponibles = await this.obtenerDiasDisponibles();
     if (this.diasDisponibles.length == 0) {
@@ -42,17 +47,26 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
   }
 
   async ngOnChanges(changes: SimpleChanges){
+    if (changes['especialidad']) {
+      this.especialidad = changes['especialidad'].currentValue;
+      // Si cambia la especialidad seleccionada, vuelva a cargar los días disponibles
+      this.cargarDiasDisponibles();
+    }
     if (changes['especialista']) {
+      
      // const previo = changes['especialista'].previousValue;
       const actual = changes['especialista'].currentValue;
+      
       this.especialista = actual;
+      
+      console.log(this.especialidad);
       this.loading = true;
       if (this.especialista) {
-        this.especialistaData = await this.auth.getEspecialistasByUid(
-          this.especialista
+        this.especialistaData = await this.auth.getUserByUidAndType(
+          this.especialista, 'especialistas'
         );
       }
-      this.diasDisponibles = await this.obtenerDiasDisponibles();
+      this.cargarDiasDisponibles();
       this.loading = false;
     }
   }
@@ -66,19 +80,42 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
     }
   }
 
+  async cargarDiasDisponibles() {
+    // Vuelve a cargar los días disponibles llamando a tu lógica existente
+    this.diasDisponibles = await this.obtenerDiasDisponibles();
+  }
+
   obtenerFechaFormateada(fecha: Date): string {
+    // const opcionesFecha = {
+    //   weekday: 'long',
+    //   year: 'numeric',
+    //   month: '2-digit',
+    //   day: '2-digit'
+     
+     
+    // } as any;
+    // return fecha.toLocaleDateString('es-ES', opcionesFecha);
+
     const opcionesFecha = {
       weekday: 'long',
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric',
-    } as any;
-    return fecha.toLocaleDateString('es-ES', opcionesFecha);
+    } as any
+
+    const year = fecha.getFullYear();
+    const month = fecha.getMonth() + 1; // Sumar 1 porque los meses van de 0 a 11
+    const day = fecha.getDate();
+  
+    const formattedMonth = month < 10 ? `0${month}` : `${month}`;
+    const formattedDay = day < 10 ? `0${day}` : `${day}`;
+
+    
+  
+    return `${fecha.toLocaleDateString('es-ES', opcionesFecha)} - ${year}-${formattedMonth}-${formattedDay}`;
   }
 
   seleccionarHora(dia: Date, hora: string): void {
     this.selectedDay = dia;
     this.selectedHour = hora;
+    this.seleccionarTurno();
   }
 
   async obtenerDiasDisponibles(): Promise<{ dia: Date; horarios: string[] }[]> {
@@ -89,22 +126,23 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
      const todosLosTurnos = this.especialista
      ? await this.auth.obtenerTurnos(this.especialista)
      : [];
-      // Calcular los horarios disponibles para la 'mañana' y la 'tarde'
-      const horariosManana = this.obtenerHorariosDisponibles('mañana');
-      const horariosTarde = this.obtenerHorariosDisponibles('tarde');
-
-      //Verificar que no haya horarios ya pasados
-
-      
-      const horariosPosibles = horariosManana.concat(horariosTarde);
-
-      if (horariosPosibles.length == 0) {
-        return [];
-      }
-
-    for (let i = 0; i < 15; i++) {
+      for (let i = 0; i < 16; i++) {
       const dia = new Date(today);
       dia.setDate(today.getDate() + i);
+
+      if (dia.getDay() === 0) {
+        continue;
+      }
+
+      // Si el día es sábado, ajustar los horarios disponibles
+      let horariosPosibles;
+      if (dia.getDay() === 6) {
+        horariosPosibles = this.obtenerHorariosDisponibles('sabado');
+      } else {
+        const horariosManana = this.obtenerHorariosDisponibles('mañana');
+        const horariosTarde = this.obtenerHorariosDisponibles('tarde');
+        horariosPosibles = horariosManana.concat(horariosTarde);
+      }
 
       // Filtrar los turnos del especialista para el día actual
       const turnosDelDia = todosLosTurnos.filter((turno) =>
@@ -131,9 +169,11 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
   mismoDia(timestamp: any, dia: Date): boolean {
     const turnoFecha = this.convertirTimestampADate(timestamp);
     return (
-      turnoFecha.getDate() === dia.getDate() &&
+      turnoFecha.getFullYear() === dia.getFullYear() &&
       turnoFecha.getMonth() === dia.getMonth() &&
-      turnoFecha.getFullYear() === dia.getFullYear()
+      turnoFecha.getDate() === dia.getDate() 
+     
+     
     );
   }
 
@@ -151,9 +191,9 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
     return turnos.filter((turno) => {
       const turnoFecha = this.convertirTimestampADate(turno.fecha);
       return (
-        turnoFecha.getDate() === dia.getDate() &&
-        turnoFecha.getMonth() === dia.getMonth() &&
-        turnoFecha.getFullYear() === dia.getFullYear()
+        turnoFecha.getFullYear() === dia.getFullYear() &&
+      turnoFecha.getMonth() === dia.getMonth() &&
+      turnoFecha.getDate() === dia.getDate() 
       );
     });
   }
@@ -176,11 +216,22 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
             const hora = 14 + index;
             return `${hora}:00`;
           });
-        }else{
-          return [];
+        
         }
+      }
+      if (periodo === 'sabado' && turnoEspecialista.turno === 'mañana') {
+        horariosDisponibles = Array.from({ length: 7 }, (_, index) => {
+          const hora = 8 + index;
+          return `${hora}:00`;
+        });
       }
     }
     return horariosDisponibles;
+  }
+
+  mostrarDias(dia: Date) {
+    console.log('funciona');
+    this.activarDias = true;
+    this.diaSeleccionado = dia;
   }
 }

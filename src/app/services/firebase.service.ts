@@ -176,57 +176,61 @@ export class FirebaseService {
 
 
 
-  async getAdminByUid(uid: string | undefined): Promise<Admin | null> {
+  async getUserByUidAndType(uid: string, type: string): Promise<any> {
     try {
-      const q = query(collection(this.db, 'admins'), where('uid', '==', uid));
+      const q = query(collection(this.db, type), where('uid', '==', uid));
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.size === 0) {
-        console.log('No se encontró ningún administrador con el UID proporcionado');
+        console.log(`No se encontró ningún ${type} con el UID proporcionado`);
         return null;
       }
-      const adminData = querySnapshot.docs[0].data();
-      const admin = new Admin(
-        adminData['uid'],
-        adminData['nombre'],
-        adminData['apellido'],
-        adminData['edad'],
-        adminData['dni'],
-        adminData['foto1']
-      );
-      return admin;
-    } catch (error) {
-      console.error('Error al buscar el administrador por UID: ', error);
-      return null;
-    }
-  }
 
-  async getPacientesByUid(uid: string): Promise<Paciente | null> {
-    try {
-      const q = query(
-        collection(this.db, 'pacientes'),
-        where('uid', '==', uid)
-      );
-      const querySnapshot = await getDocs(q);
+      const userData = querySnapshot.docs[0].data();
+      let user;
 
-      if (querySnapshot.size === 0) {
-        console.log('No se encontró ningún paciente con el UID proporcionado');
-        return null;
+      switch (type) {
+        case 'admins':
+          user = new Admin(
+            userData['uid'],
+            userData['nombre'],
+            userData['apellido'],
+            userData['edad'],
+            userData['dni'],
+            userData['foto1']
+          );
+          break;
+        case 'pacientes':
+          user = new Paciente(
+            userData['uid'],
+            userData['nombre'],
+            userData['apellido'],
+            userData['edad'],
+            userData['dni'],
+            userData['obraSocial'],
+            userData['foto1'],
+            userData['foto2']
+          );
+          break;
+        case 'especialistas':
+          user = new Especialista(
+            userData['uid'],
+            userData['nombre'],
+            userData['apellido'],
+            userData['edad'],
+            userData['dni'],
+            userData['especialidades'],
+            userData['foto1'],
+            userData['verificado']
+          );
+          user.turnos = userData['turnos'];
+          break;
       }
-      const pacienteData = querySnapshot.docs[0].data();
-      const paciente = new Paciente(
-        pacienteData['uid'],
-        pacienteData['nombre'],
-        pacienteData['apellido'],
-        pacienteData['edad'],
-        pacienteData['dni'],
-        pacienteData['obraSocial'],
-        pacienteData['foto1'],
-        pacienteData['foto2']
-      );
-      return paciente;
+
+      return user;
+      
     } catch (error) {
-      console.error('Error al buscar el paciente por UID: ', error);
+      
       return null;
     }
   }
@@ -260,33 +264,7 @@ export class FirebaseService {
     }
   }
 
-  async getEspecialistasByUid(uid: string): Promise<Especialista | null> {
-    try {
-      const q = query(collection(this.db, 'especialistas'), where('uid', '==', uid));
-      const querySnapshot = await getDocs(q);
-
-      if (querySnapshot.size === 0) {
-        console.log('No se encontró ningún especialista con el UID proporcionado');
-        return null;
-      }
-      const especialistaData = querySnapshot.docs[0].data();
-      const especialista = new Especialista(
-        especialistaData['uid'],
-        especialistaData['nombre'],
-        especialistaData['apellido'],
-        especialistaData['edad'],
-        especialistaData['dni'],
-        especialistaData['especialidades'],
-        especialistaData['foto1'],
-        especialistaData['verificado'],
-      );
-      especialista.turnos = especialistaData['turnos'];
-      return especialista;
-    } catch (error) {
-      console.error('Error al buscar el especialista por UID: ', error);
-      return null;
-    }
-  }
+  
 
   async obtenerEspecialidades(): Promise<any[]> {
     try {

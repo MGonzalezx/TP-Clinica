@@ -85,7 +85,7 @@ export class RegisterEspecialistaComponent {
   async cargarEspecialidades() {
     const especialidadesData = await this.authService.obtenerEspecialidades();
     this.especialidades = especialidadesData.map((especialidadData: any) => {
-      const especialidad = new Especialidad(especialidadData.id, especialidadData.nombre);
+      const especialidad = new Especialidad(especialidadData.id, especialidadData.nombre, especialidadData.img);
       this.form.addControl(`especialidad_${especialidad.uid}`, new FormControl(false));
       return especialidad;
     });

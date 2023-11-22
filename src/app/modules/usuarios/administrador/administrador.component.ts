@@ -22,7 +22,7 @@ export class AdministradorComponent implements OnInit {
     
         const uid = user.uid;
         console.log(uid);
-        const admin =  this.authService.getAdminByUid(uid);
+        const admin =  this.authService.getUserByUidAndType(uid,'admins');
         if(admin != null){
           this.seLogueoAdmin = true;
           console.log(admin);

@@ -1,3 +1,37 @@
 .invalid {
-    color: red;
-  }
+  color: red;
+}
+
+.container{
+  align-items: center;
+}
+
+.especialidad-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.especialista-img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.especialdiades{
+  display: flex;
+
+}
+
+.botonesEspecialistas{
+  clip-path: circle(35% at 50% 55%);
+}
+
+// .botones{
+//   clip-path: circle(35% at 50% 50%);
+// }
+
+.nombres{
+  padding-left: 90px;
+  font-weight: bold;
+}

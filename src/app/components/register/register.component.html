@@ -37,12 +37,12 @@
     <br />
     <span>Especialista</span>
     <br />
-    <div class="botones" appMiDirectivaColor="yellow">
+    <div class="botones" appMiDirectivaColor="yellow" *ngIf="seLogueoAdmin">
       <button
         class="btn"
         (click)="mostrarRegistroAdministrador()"
         [class.active]="mostrarRegistroAdministradores"
-        *ngIf="seLogueoAdmin"
+        
       >
         <img
           src="../../../assets/logoAdmin.png"
@@ -51,10 +51,10 @@
           height="130"
         />
       </button>
+      
     </div>
-
     <br />
-    <span>Administrador</span>
+      <span *ngIf="seLogueoAdmin">Administrador</span>
     <br />
   </div>
 

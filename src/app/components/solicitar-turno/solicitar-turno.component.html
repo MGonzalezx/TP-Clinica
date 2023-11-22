@@ -1,117 +1,112 @@
 <div class="container mt-3">
-    <h4 class="mb-3">Datos del turno</h4>
-    <form (ngSubmit)="onSubmit()" [formGroup]="form">
-      <div class="row g-3">
-        <div class="col-sm-6">
-          <label for="especialidad" class="form-label">Especialidad:</label>
-          <select
-            class="form-select"
-            id="especialidad"
-            formControlName="especialidad"
-            (ngModelChange)="onEspecialidadChange($event)"
-          >
-            <option value="" disabled selected>
-              Seleccione una especialidad
-            </option>
-            <option
-              *ngFor="let especialidad of especialidades"
-              [value]="especialidad.uid"
+  <h1 class="mb-3">Datos del turno</h1>
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="row g-3">
+      <div>
+        <div class="especialistas" >
+          <h2 for="especialista" class="form-label">Especialista:</h2>
+          <div class="row">
+            <div
+              *ngFor="let especialista of especialistas"
+              class="botones col-sm-3 m-1"
             >
-              {{ especialidad.nombre }}
-            </option>
-          </select>
-          <div *ngIf="form.controls['especialidad'].errors != null">
-            <small
-              class="invalid"
-              *ngIf="
-                form.controls['especialidad'].errors!['required'] &&
-                form.controls['especialidad'].touched
-              "
-            >
-              Debe seleccionar una especialidad.
-            </small>
+              <h4 class="nombres">{{ especialista.nombre }}</h4>
+              <br />
+              <button
+                class="btn btn-primary botonesEspecialistas"
+                type="button"
+                id="{{ especialista.uid }}"
+                (click)="onEspecialistaChange(especialista.uid)"
+              >
+                <img
+                  [src]="especialista.foto1"
+                  alt="Imagen de {{ especialista.nombre }}"
+                  class="img-fluid especialista-img"
+                />
+              </button>
+            </div>
           </div>
         </div>
-  
-        <div *ngIf="especialidadSeleccionada">
-          <div class="col-sm-6">
-            <label for="especialista" class="form-label">Especialista:</label>
-            <select
-              class="form-select"
-              id="especialista"
-              formControlName="especialista"
-              (ngModelChange)="onEspecialistaChange($event)"
+
+        <div *ngIf="especialistaSeleccionado" class="especialidades">
+          <h2 for="especialidad" class="form-label">Especialidad:</h2>
+          <div class="row">
+            <div
+              *ngFor="let especialidad of especialidadesFiltradas"
+              class="col-sm-3 m-1"
             >
-              <option value="" disabled selected>
-                Seleccione un especialista
-              </option>
-              <option
-                *ngFor="let especialista of especialistasFiltrados"
-                [value]="especialista.uid"
+              <button
+                class="btn btn-primary"
+                type="button"
+                id="{{ especialidad.uid }}"
+                
+                (click)="onEspecialidadChange(especialidad.uid)"
               >
-                {{ especialista.nombre }}
-              </option>
-            </select>
-            <div *ngIf="form.controls['especialista'].errors != null">
-              <small
-                class="invalid"
-                *ngIf="
-                  form.controls['especialista'].errors!['required'] &&
-                  form.controls['especialista'].touched
-                "
-              >
-                Debe seleccionar un especialista.
-              </small>
+                <img
+                  [src]="
+                    especialidad.img ||
+                    '../../../assets/especialidadDefault.PNG'
+                  "
+                  alt="Imagen de {{ especialidad.nombre }}"
+                  class="img-fluid especialidad-img"
+                />
+                <br />
+                <span>{{ especialidad.nombre }}</span>
+              </button>
             </div>
           </div>
-          <div *ngIf="especialista">
-            <div class="col-sm-6">
-              <app-listado-dias-turno
-                [especialista]="especialista"
-                [especialidad]="especialidadSeleccionada"
-                (turnoSeleccionado)="onTurnoSeleccionado($event)"
-              ></app-listado-dias-turno>
-            </div>
-            <div *ngIf="fechaObtenida">
-              <div *ngIf="esAdmin == true">
-                <div class="col-sm-6">
-                  <label for="paciente" class="form-label">Paciente:</label>
-                  <select
-                    class="form-select"
-                    id="paciente"
-                    formControlName="paciente"
-                    (ngModelChange)="onEspecialistaChange($event)"
+        </div>
+      </div>
+
+      <div *ngIf="especialidadSeleccionada">
+        <div *ngIf="especialista">
+          <div class="col-sm-6">
+            <app-listado-dias-turno
+              [especialista]="especialista"
+              [especialidad]="especialidadSeleccionada"
+              (turnoSeleccionado)="onTurnoSeleccionado($event)"
+            ></app-listado-dias-turno>
+          </div>
+          <div *ngIf="fechaObtenida">
+            <div *ngIf="esAdmin == true">
+              <div class="col-sm-6">
+                <label for="paciente" class="form-label">Paciente:</label>
+                <select
+                  class="form-select"
+                  id="paciente"
+                  formControlName="paciente"
+                  (ngModelChange)="onEspecialistaChange($event)"
+                >
+                  <option value="" disabled selected>
+                    Seleccione un paciente
+                  </option>
+                  <option
+                    *ngFor="let paciente of pacientes"
+                    [value]="paciente.uid"
                   >
-                    <option value="" disabled selected>
-                      Seleccione un paciente
-                    </option>
-                    <option
-                      *ngFor="let paciente of pacientes"
-                      [value]="paciente.uid"
-                    >
-                      {{ paciente.nombre }} {{ paciente.apellido }}
-                    </option> 
-                  </select>
-                  <div *ngIf="form.controls['paciente'].errors != null">
-                    <small
-                      class="invalid"
-                      *ngIf="
-                        form.controls['paciente'].errors!['required'] &&
-                        form.controls['paciente'].touched
-                      "
-                    >
-                      Debe seleccionar un paciente.
-                    </small>
-                  </div>
+                    {{ paciente.nombre }} {{ paciente.apellido }}
+                  </option>
+                </select>
+                <div *ngIf="form.controls['paciente'].errors != null">
+                  <small
+                    class="invalid"
+                    *ngIf="
+                      form.controls['paciente'].errors!['required'] &&
+                      form.controls['paciente'].touched
+                    "
+                  >
+                    Debe seleccionar un paciente.
+                  </small>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <hr class="my-4" />
-      <button class="w-100 btn btn-primary btn-lg" type="submit">
-        Registrar turno
-      </button>
-    </form>
-  </div>
+    </div>
+    <hr class="my-4" />
+    <button class="w-100 btn btn-primary btn-lg" type="submit">
+      Registrar turno
+    </button>
+  </form>
+</div>
