@@ -1,5 +1,5 @@
 
-body {
+.container {
     background: #76b852; /* fallback for old browsers */
     background: -webkit-linear-gradient(right, #76b852, #8DC26F);
     background: -moz-linear-gradient(right, #76b852, #8DC26F);
@@ -12,7 +12,11 @@ body {
 
   h1{
     align-items: center;
-    padding: 1%;
+    padding: 2%;
+    padding-top: 5%;
+    color:darkgreen;
+    font-size: 50px;
+    
   }
   
   .switch {
@@ -122,4 +126,8 @@ table{
 
 .busqueda{
   padding-inline-start: 60%;
+}
+
+.filtro-busqueda{
+    background-color: gainsboro;
 }

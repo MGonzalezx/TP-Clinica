@@ -7,8 +7,9 @@ import { TurnosPacienteComponent } from 'src/app/modules/turnos/turnos-paciente/
 import { SolicitarTurnoComponent } from 'src/app/components/solicitar-turno/solicitar-turno.component';
 import { ListadoDiasTurnoComponent } from './listado-dias-turno/listado-dias-turno.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { DatepipePipe } from 'src/app/pipes/datepipe.pipe';
 import { EncuestaComponent } from './encuesta/encuesta.component';
+import { MedicoPipe } from 'src/app/pipes/medico.pipe';
 @NgModule({
   declarations: [
     MisTurnosComponent,
@@ -16,7 +17,9 @@ import { EncuestaComponent } from './encuesta/encuesta.component';
     TurnosPacienteComponent,
     SolicitarTurnoComponent,    
     ListadoDiasTurnoComponent,
-    EncuestaComponent
+    EncuestaComponent,
+    DatepipePipe,
+    MedicoPipe
   ],
   imports: [
     CommonModule,

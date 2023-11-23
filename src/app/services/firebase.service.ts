@@ -436,12 +436,6 @@ public async obtenerTurnosDelUsuario(uid: string,tipo: string): Promise<Turno[]>
       turnoData['fecha'],
       turnoData['hora']
     );
-    if (turnoData['comentario']) {
-      turno.comentario = turnoData['comentario'];
-    }
-    if (turnoData['resena']) {
-      turno.resena = turnoData['resena'];
-    }
     turnos.push(turno);
   });
 

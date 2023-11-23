@@ -1,1 +1,70 @@
-<p>Turnos-paciente funciona</p>
+<div class="container">
+  <h1>Mis Turnos</h1>
+  <div class="mb-3 busqueda">
+    <label for="filtroEspecialidad" class="form-label"
+      >Filtrar por especialidad:</label
+    >
+    <input
+      #filtroEspecialidad
+      type="text"
+      class="form-control filtro-busqueda"
+      id="filtroEspecialidad"
+      (input)="filtrarTurnos()"
+    />
+  </div>
+  <div class="mb-3 busqueda">
+    <label for="filtroEspecialista" class="form-label"
+      >Filtrar por especialista:</label
+    >
+    <input
+      #filtroEspecialista
+      type="text"
+      class="form-control filtro-busqueda"
+      id="filtroEspecialista"
+      (input)="filtrarTurnos()"
+    />
+  </div>
+
+  <div class="list-group">
+    <div *ngFor="let turno of turnosFiltrados | async">
+      <a class="list-group-item list-group-item-action mb-3">
+        <div>
+          <div>
+            <p>
+              Para: <b style="color: darkgreen">{{ turno.Especialidad }}</b>
+            </p>
+            <p>
+              Dia: <i>{{ obtenerFechaFormateada(turno.fecha) }}</i>
+            </p>
+            <p>
+              Hora: <i> {{ turno.hora }} hs</i>
+            </p>
+          </div>
+          <p class="mb-1">
+            Especialista:
+            <i> Dr. {{ turno.especialista | medico : turno.Especialista }} </i>
+          </p>
+          <p class="card-text">
+            Estado: <b>{{ turno.estado }}</b>
+          </p>
+
+          <small
+            >Paciente: <i> {{ turno.idPaciente }} </i>
+          </small>
+          <br />
+          <td style="padding: 2%">
+            <button class="btn btn-success">Cancelar turno</button>
+          </td>
+
+          <td style="padding: 2%">
+            <button class="btn btn-success">Ver reseña</button>
+          </td>
+
+          <td style="padding: 2%">
+            <button class="btn btn-success">Calificar Atencion</button>
+          </td>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
