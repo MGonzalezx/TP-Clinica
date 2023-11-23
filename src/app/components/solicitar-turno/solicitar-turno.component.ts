@@ -262,8 +262,8 @@ export class SolicitarTurnoComponent implements OnInit {
   async validarTurno(pacienteId: string) {
     const especialidad = this.form.controls['especialidad'].value;
 
-    const turnosDelPaciente = await this.authService.obtenerTurnosDelPaciente(
-      pacienteId
+    const turnosDelPaciente = await this.authService.obtenerTurnosDelUsuario(
+      pacienteId,'paciente'
     );
 
     const turnosEnLaMismaEspecialidad = turnosDelPaciente.filter(

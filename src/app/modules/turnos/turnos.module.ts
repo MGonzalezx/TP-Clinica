@@ -8,6 +8,7 @@ import { SolicitarTurnoComponent } from 'src/app/components/solicitar-turno/soli
 import { ListadoDiasTurnoComponent } from './listado-dias-turno/listado-dias-turno.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { EncuestaComponent } from './encuesta/encuesta.component';
 @NgModule({
   declarations: [
     MisTurnosComponent,
@@ -15,12 +16,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TurnosPacienteComponent,
     SolicitarTurnoComponent,    
     ListadoDiasTurnoComponent,
+    EncuestaComponent
   ],
   imports: [
     CommonModule,
     TurnosRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    
   ]
 })
 export class TurnosModule { }

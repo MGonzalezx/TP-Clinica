@@ -7,18 +7,21 @@ import { AdministrarEspecialistasComponent } from './administrar-especialistas/a
 import { NavbarAdmComponent } from './navbar-adm/navbar-adm.component';
 import { AdministrarTurnosComponent } from './administrar-turnos/administrar-turnos.component';
 //import { RegisterModule } from '../register/register.module';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AdministradorComponent,
     AdministrarEspecialistasComponent,
     NavbarAdmComponent,
-    AdministrarTurnosComponent
+    AdministrarTurnosComponent,
+  
   ],
   imports: [
     CommonModule,
     UsuariosRoutingModule,
+    ReactiveFormsModule,
+    FormsModule
     //RegisterModule
   ],exports:[NavbarAdmComponent]
 })

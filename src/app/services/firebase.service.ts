@@ -34,6 +34,7 @@ import { Turno } from '../clases/turno';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Horario } from '../clases/horario';
+import { Encuesta } from '../clases/encuesta';
 @Injectable({
   providedIn: 'root'
 })
@@ -412,10 +413,14 @@ export class FirebaseService {
     return turnos;
 }
 
-public async obtenerTurnosDelPaciente(pacienteid: string): Promise<Turno[]> {
+public async obtenerTurnosDelUsuario(uid: string,tipo: string): Promise<Turno[]> {
+  let condicion = 'especialista';
+    if (tipo == 'paciente') {
+      condicion = 'paciente';
+    }
   const q = query(
     collection(this.db, 'turnos'),
-    where('paciente', '==', pacienteid)
+    where(condicion, '==', uid)
   );
   const querySnapshot = await getDocs(q);
   const turnos: Turno[] = [];
@@ -431,6 +436,12 @@ public async obtenerTurnosDelPaciente(pacienteid: string): Promise<Turno[]> {
       turnoData['fecha'],
       turnoData['hora']
     );
+    if (turnoData['comentario']) {
+      turno.comentario = turnoData['comentario'];
+    }
+    if (turnoData['resena']) {
+      turno.resena = turnoData['resena'];
+    }
     turnos.push(turno);
   });
 
