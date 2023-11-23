@@ -2,18 +2,18 @@ export class Encuesta {
   uid: string;
   puntajeClinica: number;
   comentarioClinica: string;
-  puntajeEspecialista: number;
-  comentarioEspecialista: string;
+  puntajePersonal: number;
+  comentarioPersonal: string;
   constructor(
     puntajeClinica: number,
     comentarioClinica: string,
-    puntajeEspecialista: number,
-    comentarioEspecialista: string
+    puntajePersonal: number,
+    comentarioPersonal: string
   ) {
     this.puntajeClinica = puntajeClinica;
     this.comentarioClinica = comentarioClinica;
-    this.puntajeEspecialista = puntajeEspecialista;
-    this.comentarioEspecialista = comentarioEspecialista;
+    this.puntajePersonal = puntajePersonal;
+    this.comentarioPersonal = comentarioPersonal;
     this.uid = '';
   }
 }

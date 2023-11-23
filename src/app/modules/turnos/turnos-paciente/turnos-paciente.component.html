@@ -52,19 +52,28 @@
             >Paciente: <i> {{ turno.Paciente }} </i>
           </small>
           <br />
-          <td style="padding: 2%" *ngIf="turno.estado != 'realizado'">
-            <button class="btn btn-success" (click)="cancelarTurno()">Cancelar turno</button>
+          <div *ngIf="encuesta && turno.uid === turnoA?.uid">
+            <app-encuesta (encuestaEnviada)="manejarEncuestaEnviada($event)"></app-encuesta>
+          </div>
+          <td style="padding: 2%" *ngIf="
+          turno.estado === 'espera' ||
+          (turno.estado !== 'aceptado' &&
+            turno.estado !== 'cancelado' &&
+            turno.estado !== 'rechazado' &&
+            turno.estado !== 'finalizado')
+        ">
+            <button class="btn btn-success" (click)="cancelarTurno(turno)">Cancelar turno</button>
           </td>
 
-          <td style="padding: 2%" *ngIf="turno.resena != '' && turno.comentario != ''" >
-            <button class="btn btn-success" (click)="verResena()">Ver reseña</button>
+          <td style="padding: 2%" *ngIf="turno.resena !== '' || turno.comentario !== ''" >
+            <button class="btn btn-success" (click)="verResenia(turno)">Ver reseña</button>
           </td>
 
-          <td style="padding: 2%" *ngIf="turno.estado === 'realizado'">
-            <button class="btn btn-success" (click)="calificarAtencion()">Calificar Atencion</button>
+          <td style="padding: 2%" *ngIf="turno.estado === 'finalizado' && turno.atencion === ''">
+            <button class="btn btn-success" (click)="calificarAtencion(turno)">Calificar Atencion</button>
           </td>
-          <td style="padding: 2%" *ngIf="turno.estado === 'realizado' && turno.resena != ''">
-            <button class="btn btn-success" (click)="completarEncuesta()">Completar Encuesta</button>
+          <td style="padding: 2%" *ngIf="turno.estado === 'finalizado' && turno.resena != '' && turno.encuesta != ''">
+            <button class="btn btn-success" (click)="completarEncuesta(turno)">Completar Encuesta</button>
           </td>
         </div>
       </a>

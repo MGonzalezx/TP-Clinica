@@ -443,6 +443,15 @@ public async obtenerTurnosDelUsuario(uid: string,tipo: string): Promise<Turno[]>
     if (turnoData['resena']) {
       turno.resena = turnoData['resena'];
     }
+    if (turnoData['historiaClinica']) {
+      turno.historiaClinica = turnoData['historiaClinica'];
+    }
+    if (turnoData['encuesta']) {
+      turno.encuesta = turnoData['encuesta'];
+    }
+    if (turnoData['atencion']) {
+      turno.encuesta = turnoData['atencion'];
+    }
     turnos.push(turno);
   });
 
@@ -479,8 +488,8 @@ public async obtenerTurnosDelUsuario(uid: string,tipo: string): Promise<Turno[]>
       const docRef = await addDoc(collection(this.db, 'encuestas'), {
         puntajeClinica: encuesta.puntajeClinica,
         comentarioClinica: encuesta.comentarioClinica,
-        puntajeEspecialista: encuesta.puntajeEspecialista,
-        comentarioEspecialista: encuesta.comentarioEspecialista,
+        puntajePersonal: encuesta.puntajePersonal,
+        comentarioPersonal: encuesta.comentarioPersonal,
       });
   
       console.log('Document written with ID:', docRef.id);

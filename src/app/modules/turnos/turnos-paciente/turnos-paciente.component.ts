@@ -2,7 +2,10 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-
+import { Turno } from 'src/app/clases/turno';
+import { AlertasService } from 'src/app/services/alertas.service';
+import { Encuesta } from 'src/app/clases/encuesta';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-turnos-paciente',
   templateUrl: './turnos-paciente.component.html',
@@ -10,8 +13,9 @@ import { map } from 'rxjs/operators';
 })
 export class TurnosPacienteComponent implements OnInit {
   turnos: any[] = [];
+  turnoA: Turno | null = null;
   @Input() pacienteId: string = '';
-
+  encuesta: boolean = false;
   @ViewChild('filtroEspecialidad') filtroEspecialidad!: ElementRef;
   @ViewChild('filtroEspecialista') filtroEspecialista!: ElementRef;
 
@@ -27,11 +31,12 @@ export class TurnosPacienteComponent implements OnInit {
 
   constructor(
     private firestoreService: FirebaseService,
-
+    private alertas: AlertasService
   ) {}
 
   ngOnInit(){
    // Tarda mucho en cargar, poner spninner luego
+
     this.cargarTurnos();
     
   }
@@ -42,7 +47,8 @@ export class TurnosPacienteComponent implements OnInit {
     try {
       const turnos = await this.firestoreService.obtenerTurnosDelUsuario(this.pacienteId,'paciente');
       const especialidades = await this.firestoreService.obtenerEspecialidades();
-  
+      console.log(turnos);
+      
       //ejecutar múltiples promesas de manera concurrente y esperar a que todas se resuelvan antes de continuar con la ejecución del código.
       const turnosConDatos = await Promise.all(
         turnos.map(async (turno) => {
@@ -53,7 +59,7 @@ export class TurnosPacienteComponent implements OnInit {
           turno.Especialidad = especialidad?.nombre || '';
           turno.idEspecialidad = especialidad?.id || '';
           turno.Especialista = `${especialista?.nombre} ${especialista?.apellido}` || '';
-          turno.idEspecialista = especialista?.id || '';
+          turno.idEspecialista = especialista?.uid || '';
           turno.Paciente = `${paciente?.nombre} ${paciente?.apellido}` || '';
           return turno;
         })
@@ -80,19 +86,73 @@ export class TurnosPacienteComponent implements OnInit {
     return `${fechaFormateada}`;
   }
 
-  async cancelarTurno(){
+  async cancelarTurno( turno: Turno) {
+    this.alertas.mostraAlertaInput('Cancelar Turno','Ingrese motivo de la cancelación').then(comentario=>{
+      if(comentario != undefined){
+
+        turno.estado = 'cancelado';
+        turno.comentarioPaciente = comentario;
+        
+        
+        this.firestoreService.modificarTurno(turno);
+
+      }
+
+    });
+  }
+
+  verResenia(turno:Turno){
+    console.log(turno.comentario);
+    console.log(turno.resena);
+
+    
+    this.alertas.mostraAlertaSimpleSinIcono(turno.resena + turno.comentario ,'Reseña del Turno');
 
   }
 
-  verResena(){
-
+  async manejarEncuestaEnviada(id: string) {
+    console.log('Encuesta enviada:', id);
+    if (this.turnoA ) {
+      this.turnoA.encuesta = id;
+      try {
+        console.log(this.turnoA);
+        await this.firestoreService.modificarTurno(this.turnoA);
+        Swal.fire({
+          icon: 'success',
+          title: 'Encuesta enviada',
+          text: 'Encuesta enviada..',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.encuesta = false;
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Hubo un problema',
+          text: 'no se pudo enviar la encuesta..',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    }
   }
 
-  completarEncuesta(){
-
+  completarEncuesta(turno : Turno) {
+    this.encuesta = true;
+    this.turnoA = turno;
   }
 
-  calificarAtencion(){
+  calificarAtencion(turno: Turno){
+    // console.log(turno);
+    this.alertas.mostraAlertaInput('Reseña atención','Por favor, ingrese una reseña sobre la atencion de ' + turno.Especialista).then(texto=>{
 
+      if(texto != undefined){
+          
+        turno.atencion = texto;
+        
+        this.firestoreService.modificarTurno(turno);
+        
+      }
+    });
   }
 }

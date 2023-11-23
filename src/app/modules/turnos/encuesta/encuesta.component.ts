@@ -22,15 +22,15 @@ export class EncuestaComponent {
       puntajeClinica: new FormControl('', [
         Validators.required,
         Validators.min(1),
-        Validators.max(5),
+        Validators.max(10),
       ]),
       comentarioClinica: new FormControl('', [Validators.required]),
-      puntajeEspecialista: new FormControl('', [
+      puntajePersonal: new FormControl('', [
         Validators.required,
         Validators.min(1),
-        Validators.max(5),
+        Validators.max(10),
       ]),
-      comentarioEspecialista: new FormControl('', [Validators.required]),
+      comentarioPersonal: new FormControl('', [Validators.required]),
     });
   }
 
@@ -40,8 +40,8 @@ export class EncuestaComponent {
         let encuesta = new Encuesta(
           this.form.controls['puntajeClinica'].value,
           this.form.controls['comentarioClinica'].value,
-          this.form.controls['puntajeEspecialista'].value,
-          this.form.controls['comentarioEspecialista'].value
+          this.form.controls['puntajePersonal'].value,
+          this.form.controls['comentarioPersonal'].value
         );
         console.log(encuesta);
         let id = await this.authService.guardarEncuesta(encuesta);
