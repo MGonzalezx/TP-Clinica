@@ -6,6 +6,10 @@ export class Turno {
   Especialidad: string;
   idPaciente: string;
   Paciente: string;
+  resena: string;
+  comentario: string;
+  atencion: string;
+  encuesta: string;
   estado: string;
   fecha: string;
   hora: string;
@@ -28,5 +32,9 @@ export class Turno {
     this.Especialidad='';
     this.Especialista='';
     this.Paciente = '';
+    this.resena='';
+    this.comentario='';
+    this.atencion='';
+    this.encuesta='';
   }
 }

@@ -405,7 +405,7 @@ export class FirebaseService {
         turnoData['paciente'],
         turnoData['estado'],
         turnoData['fecha'],
-        turnoData['hora']
+        turnoData['hora'],
       );
       turnos.push(turno);
     });
@@ -434,8 +434,15 @@ public async obtenerTurnosDelUsuario(uid: string,tipo: string): Promise<Turno[]>
       turnoData['paciente'],
       turnoData['estado'],
       turnoData['fecha'],
-      turnoData['hora']
+      turnoData['hora'],
+
     );
+    if (turnoData['comentario']) {
+      turno.comentario = turnoData['comentario'];
+    }
+    if (turnoData['resena']) {
+      turno.resena = turnoData['resena'];
+    }
     turnos.push(turno);
   });
 
@@ -459,12 +466,47 @@ public async obtenerTurnosDelUsuario(uid: string,tipo: string): Promise<Turno[]>
         turnoData['paciente'],
         turnoData['estado'],
         turnoData['fecha'],
-        turnoData['hora']
+        turnoData['hora'],
       );
       turnos.push(turno);
     });
 
     return turnos;
+  }
+
+  public async guardarEncuesta(encuesta: Encuesta) {
+    try {
+      const docRef = await addDoc(collection(this.db, 'encuestas'), {
+        puntajeClinica: encuesta.puntajeClinica,
+        comentarioClinica: encuesta.comentarioClinica,
+        puntajeEspecialista: encuesta.puntajeEspecialista,
+        comentarioEspecialista: encuesta.comentarioEspecialista,
+      });
+  
+      console.log('Document written with ID:', docRef.id);
+      return docRef.id;
+    } catch (error) {
+      console.error('Error adding document:', error);
+      return false;
+    }
+  }
+
+  public async modificarTurno(turno: Turno): Promise<void> {
+    console.log(turno);
+    const turnoRef = doc(this.db, 'turnos', turno.uid);
+
+    await updateDoc(turnoRef, {
+      especialidad: turno.idEspecialidad,
+      especialista: turno.idEspecialista,
+      paciente: turno.idPaciente,
+      estado: turno.estado,
+      fecha: turno.fecha,
+      hora: turno.hora,
+      resena: turno.resena,
+      comentario: turno.comentario,
+      atencion:turno.atencion,
+      encuesta:turno.encuesta
+    });
   }
  
 }

@@ -49,19 +49,22 @@
           </p>
 
           <small
-            >Paciente: <i> {{ turno.idPaciente }} </i>
+            >Paciente: <i> {{ turno.Paciente }} </i>
           </small>
           <br />
-          <td style="padding: 2%">
-            <button class="btn btn-success">Cancelar turno</button>
+          <td style="padding: 2%" *ngIf="turno.estado != 'realizado'">
+            <button class="btn btn-success" (click)="cancelarTurno()">Cancelar turno</button>
           </td>
 
-          <td style="padding: 2%">
-            <button class="btn btn-success">Ver reseña</button>
+          <td style="padding: 2%" *ngIf="turno.resena != '' && turno.comentario != ''" >
+            <button class="btn btn-success" (click)="verResena()">Ver reseña</button>
           </td>
 
-          <td style="padding: 2%">
-            <button class="btn btn-success">Calificar Atencion</button>
+          <td style="padding: 2%" *ngIf="turno.estado === 'realizado'">
+            <button class="btn btn-success" (click)="calificarAtencion()">Calificar Atencion</button>
+          </td>
+          <td style="padding: 2%" *ngIf="turno.estado === 'realizado' && turno.resena != ''">
+            <button class="btn btn-success" (click)="completarEncuesta()">Completar Encuesta</button>
           </td>
         </div>
       </a>

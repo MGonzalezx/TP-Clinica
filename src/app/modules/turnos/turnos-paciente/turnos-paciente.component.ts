@@ -36,33 +36,6 @@ export class TurnosPacienteComponent implements OnInit {
     
   }
 
-  // async cargarTurnos() {
-  //   if (this.pacienteId !== '') {
-  //     let turnos = await this.firestoreService.obtenerTurnosDelUsuario(
-  //       this.pacienteId,'paciente'
-  //     );
-  //     let especialidades = await this.firestoreService.obtenerEspecialidades();
-
-  //     for (let turno of turnos) {
-  //       let especialidad = especialidades.find(
-  //         (especialidad) => especialidad.id === turno.idEspecialidad
-  //       );
-  //       turno.Especialidad = especialidad.nombre;
-  //       turno.idEspecialidad = especialidad.id;
-
-  //       let especialista = await this.firestoreService.getUserByUidAndType(
-  //         turno.idEspecialista,
-  //         'especialistas'
-  //       );
-
-  //       turno.Especialista = especialista.nombre + ' ' + especialista.apellido;
-  //       turno.idEspecialista = especialista.id;
-  //     }
-
-  //     this._turnos.next(turnos);
-  //   }
-  // }
-
   async cargarTurnos() {
     if (!this.pacienteId) return;
   
@@ -75,12 +48,13 @@ export class TurnosPacienteComponent implements OnInit {
         turnos.map(async (turno) => {
           const especialidad = especialidades.find((especialidad) => especialidad.id === turno.idEspecialidad);
           const especialista = await this.firestoreService.getUserByUidAndType(turno.idEspecialista, 'especialistas');
-  
+          const paciente = await this.firestoreService.getUserByUidAndType(turno.idPaciente,'pacientes');
+
           turno.Especialidad = especialidad?.nombre || '';
           turno.idEspecialidad = especialidad?.id || '';
           turno.Especialista = `${especialista?.nombre} ${especialista?.apellido}` || '';
           turno.idEspecialista = especialista?.id || '';
-  
+          turno.Paciente = `${paciente?.nombre} ${paciente?.apellido}` || '';
           return turno;
         })
       );
@@ -106,5 +80,19 @@ export class TurnosPacienteComponent implements OnInit {
     return `${fechaFormateada}`;
   }
 
+  async cancelarTurno(){
 
+  }
+
+  verResena(){
+
+  }
+
+  completarEncuesta(){
+
+  }
+
+  calificarAtencion(){
+
+  }
 }

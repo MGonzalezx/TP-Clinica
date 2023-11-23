@@ -1,1 +1,115 @@
-<p>Turnos-especialista funciona</p>
+<div class="container">
+  <h1>Mis Turnos</h1>
+  <div class="mb-3 busqueda">
+    <label for="filtroEspecialidad" class="form-label"
+      >Filtrar por especialidad:</label
+    >
+    <input
+      #filtroEspecialidad
+      type="text"
+      class="form-control filtro-busqueda"
+      id="filtroEspecialidad"
+      (input)="filtrarTurnos()"
+    />
+  </div>
+  <div class="mb-3 busqueda">
+    <label for="filtroPaciente" class="form-label">Filtrar por paciente:</label>
+    <input
+      #filtroPaciente
+      type="text"
+      class="form-control filtro-busqueda"
+      id="filtroPaciente"
+      (input)="filtrarTurnos()"
+    />
+  </div>
+
+  <div class="list-group">
+    <div *ngFor="let turno of turnosFiltrados | async">
+      <a class="list-group-item list-group-item-action mb-3">
+        <div>
+          <div>
+            <p>
+              Para:
+              <b style="color: cornflowerblue">{{ turno.Especialidad }}</b>
+            </p>
+            <p>
+              Dia: <i>{{ obtenerFechaFormateada(turno.fecha) }}</i>
+            </p>
+            <p>
+              Hora: <i> {{ turno.hora }} hs</i>
+            </p>
+          </div>
+          <p>
+            Paciente:
+            <i>{{ turno.Paciente }} </i>
+          </p>
+          <p class="card-text">
+            Estado: <b>{{ turno.estado }}</b>
+          </p>
+
+          <br />
+          <td
+            style="padding: 2%"
+            *ngIf="
+              turno.estado === 'espera' ||
+              (turno.estado !== 'aceptado' &&
+                turno.estado !== 'cancelado' &&
+                turno.estado !== 'rechazado' &&
+                turno.estado !== 'finalizado')
+            "
+          >
+            <button class="btn btn-success" (click)="rechazarTurno(turno)">
+              Rechazar turno
+            </button>
+          </td>
+
+          <td
+            style="padding: 2%"
+            *ngIf="
+              turno.estado === 'espera' ||
+              (turno.estado !== 'aceptado' &&
+                turno.estado !== 'cancelado' &&
+                turno.estado !== 'rechazado' &&
+                turno.estado !== 'finalizado')
+            "
+          >
+            <button class="btn btn-success" (click)="cancelarTurno(turno)">
+              Cancelar turno
+            </button>
+          </td>
+
+          <td
+            style="padding: 2%"
+            *ngIf="
+              turno.estado === 'espera' ||
+              (turno.estado !== 'rechazado' &&
+                turno.estado !== 'aceptado' &&
+                turno.estado !== 'cancelado' &&
+                turno.estado !== 'finalizado')
+            "
+          >
+            <button class="btn btn-success" (click)="aceptarTurno(turno)">
+              Aceptar Turno
+            </button>
+          </td>
+          <td
+            style="padding: 2%"
+            *ngIf="turno.estado === 'aceptado' && turno.estado !== 'finalizado'"
+          >
+            <button class="btn btn-success" (click)="finalizarTurno(turno)">
+              Finalizar turno
+            </button>
+          </td>
+          <td
+            style="padding: 2%"
+            *ngIf="turno.resena !== '' || turno.comentario !== ''"
+          >
+            <button class="btn btn-success" (click)="verResenia(turno)">
+              Ver reseña
+            </button>
+          </td>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
