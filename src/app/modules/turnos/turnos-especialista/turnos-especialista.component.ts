@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { Turno } from 'src/app/clases/turno';
 import Swal from 'sweetalert2';
 import { AlertasService } from 'src/app/services/alertas.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-turnos-especialista',
   templateUrl: './turnos-especialista.component.html',
@@ -47,14 +47,16 @@ export class TurnosEspecialistaComponent {
 
   constructor(
     private firestoreService: FirebaseService,
-    private alertas: AlertasService
+    private alertas: AlertasService,
+    private spinner: NgxSpinnerService
   ) {}
 
   async ngOnInit(): Promise<void> {
-    
+    this.spinner.show();
     await this.cargarTurnos();
-    
-   
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
   }
 
   async cargarTurnos() {

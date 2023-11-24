@@ -6,12 +6,13 @@ import { Turno } from 'src/app/clases/turno';
 import { AlertasService } from 'src/app/services/alertas.service';
 import { Encuesta } from 'src/app/clases/encuesta';
 import Swal from 'sweetalert2';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-turnos-paciente',
   templateUrl: './turnos-paciente.component.html',
   styleUrls: ['./turnos-paciente.component.scss']
 })
-export class TurnosPacienteComponent implements OnInit {
+export class TurnosPacienteComponent{
   turnos: any[] = [];
   turnoA: Turno | null = null;
   @Input() pacienteId: string = '';
@@ -39,14 +40,16 @@ export class TurnosPacienteComponent implements OnInit {
 
   constructor(
     private firestoreService: FirebaseService,
-    private alertas: AlertasService
+    private alertas: AlertasService,
+    private spinner: NgxSpinnerService
   ) {}
 
-  ngOnInit(){
-   // Tarda mucho en cargar, poner spninner luego
-
-    this.cargarTurnos();
-    
+  async ngOnInit(): Promise<void> {
+    this.spinner.show();
+    await this.cargarTurnos();
+    setTimeout(() => {
+      this.spinner.hide();
+    }, 2000);
   }
 
   async cargarTurnos() {

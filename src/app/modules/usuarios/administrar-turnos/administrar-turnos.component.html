@@ -1,26 +1,20 @@
 <div class="container">
+  <ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Cargando turnos...</p>
+</ngx-spinner>
     <h1 class="mb-1">Administrar Turnos</h1>
     <div class="mb-3 busqueda">
-      <label for="filtroEspecialidad" class="form-label"
-        >Filtrar por especialidad:</label
-      >
+      <label for="filtro" class="form-label">Buscar:</label>
       <input
-        #filtroEspecialidad
+        #filtro
         type="text"
         class="form-control filtro-busqueda"
-        id="filtroEspecialidad"
-        (input)="filtrarTurnos()"
-      />
-    </div>
-    <div class="mb-3 busqueda">
-      <label for="filtroEspecialista" class="form-label"
-        >Filtrar por especialista:</label
-      >
-      <input
-        #filtroEspecialista
-        type="text"
-        class="form-control filtro-busqueda"
-        id="filtroEspecialista"
+        id="filtro"
         (input)="filtrarTurnos()"
       />
     </div>
@@ -34,7 +28,7 @@
                   Para: <b style="color: darkgreen">{{ turno.Especialidad }}</b>
                 </p>
                 <p>
-                  Dia: <i>{{ obtenerFechaFormateada(turno.fecha) }}</i>
+                  Dia: <i>{{ turno.fecha }}</i>
                 </p>
                 <p>
                   Hora: <i> {{ turno.hora }} hs</i>

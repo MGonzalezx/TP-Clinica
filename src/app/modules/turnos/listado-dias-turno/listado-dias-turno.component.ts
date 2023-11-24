@@ -11,12 +11,12 @@ import Swal from 'sweetalert2';
 export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
   @Input() especialista: string | undefined;
   @Input() especialidad: string | undefined;
-  @Output() turnoSeleccionado = new EventEmitter<{ dia: Date; hora: string }>();
+  @Output() turnoSeleccionado = new EventEmitter<{ dia: string; hora: string }>();
   especialistaData: any;
 
   diasDisponibles: { dia: Date; horarios: string[] }[] = [];
   loading: boolean = false;
-  selectedDay: Date | undefined;
+  selectedDay: string | undefined;
   selectedHour: string | undefined;
   periodos = ['mañana', 'tarde'];
 
@@ -24,7 +24,7 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
 
   diaSeleccionado: Date | undefined;
 
-  constructor(private auth: FirebaseService) {
+  constructor(private auth: FirebaseService,) {
     
   }
 
@@ -39,7 +39,7 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
     this.diasDisponibles = await this.obtenerDiasDisponibles();
     if (this.diasDisponibles.length == 0) {
       this.turnoSeleccionado.emit({
-        dia: new Date(),
+        dia: '',
         hora: '',
       });
     }
@@ -113,7 +113,8 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
   }
 
   seleccionarHora(dia: Date, hora: string): void {
-    this.selectedDay = dia;
+    let fecha =  this.obtenerFechaFormateada(dia);
+    this.selectedDay = fecha;
     this.selectedHour = hora;
     this.seleccionarTurno();
   }

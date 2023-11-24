@@ -13,17 +13,33 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdministradorComponent,
+    children: [
+      { path: 'registerAdmin', component: RegisterAdministradorComponent },
+      {
+        path: 'administrar-especialistas',
+        component: AdministrarEspecialistasComponent,
+      },
+      { path: 'administrar-turnos', component: AdministrarTurnosComponent },
+      { path: 'solicitar-turno', component: SolicitarTurnoComponent },
+      { path: 'perfil', component: MiPerfilComponent },
+      { path: 'usuarios', component: ListadoHistoriasClinicasComponent },      
+    ],
   },
-  { 
-    path: 'registerAdmin', component: RegisterAdministradorComponent, 
-  },
-  {
-    path: 'administrar-especialistas',component: AdministrarEspecialistasComponent,
-  },
-  { path: 'administrar-turnos', component: AdministrarTurnosComponent },
-  { path: 'solicitar-turno', component: SolicitarTurnoComponent },
-  { path: 'perfil', component: MiPerfilComponent },
-  { path: 'usuarios', component: ListadoHistoriasClinicasComponent },
+  
+  // {
+  //   path: 'admin',
+  //   component: AdministradorComponent,
+  // },
+  // { 
+  //   path: 'registerAdmin', component: RegisterAdministradorComponent, 
+  // },
+  // {
+  //   path: 'administrar-especialistas',component: AdministrarEspecialistasComponent,
+  // },
+  // { path: 'administrar-turnos', component: AdministrarTurnosComponent },
+  // { path: 'solicitar-turno', component: SolicitarTurnoComponent },
+  // { path: 'perfil', component: MiPerfilComponent },
+  // { path: 'usuarios', component: ListadoHistoriasClinicasComponent },
 ];
 
 @NgModule({

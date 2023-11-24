@@ -9,6 +9,7 @@ import { AdministrarTurnosComponent } from './administrar-turnos/administrar-tur
 //import { RegisterModule } from '../register/register.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModulesModule } from '../shared-modules/shared-modules.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AdministradorComponent,
@@ -21,7 +22,8 @@ import { SharedModulesModule } from '../shared-modules/shared-modules.module';
     UsuariosRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    SharedModulesModule
+    SharedModulesModule,
+    NgxSpinnerModule
     //RegisterModule
   ],exports:[NavbarAdmComponent]
 })

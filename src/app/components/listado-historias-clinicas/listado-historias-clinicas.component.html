@@ -34,6 +34,7 @@
                 <strong>{{ dato.key }}:</strong> {{ dato.value }}
               </p>
             </div>
+            <button class="btn btn-primary" (click)="createPDF(historia)">Descargar pdf</button>
           </div>
         </div>
       </div>
@@ -55,6 +56,7 @@
                 <strong>{{ dato.key }}:</strong> {{ dato.value }}
               </p>
             </div>
+            <button class="btn btn-primary" (click)="descargarHistoriaClinica(historia)">Descargar excel</button>
           </div>
         </div>
       </div>

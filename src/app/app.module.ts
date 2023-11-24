@@ -32,7 +32,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { ListadoHistoriasClinicasComponent } from './components/listado-historias-clinicas/listado-historias-clinicas.component';
-
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -66,7 +66,7 @@ import { ListadoHistoriasClinicasComponent } from './components/listado-historia
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    
+    NgxSpinnerModule,
     
   ],
   providers: [
