@@ -9,7 +9,7 @@ import { ListadoDiasTurnoComponent } from './listado-dias-turno/listado-dias-tur
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatepipePipe } from 'src/app/pipes/datepipe.pipe';
 import { EncuestaComponent } from './encuesta/encuesta.component';
-import { MedicoPipe } from 'src/app/pipes/medico.pipe';
+import { SharedModulesModule } from '../shared-modules/shared-modules.module';
 @NgModule({
   declarations: [
     MisTurnosComponent,
@@ -19,13 +19,14 @@ import { MedicoPipe } from 'src/app/pipes/medico.pipe';
     ListadoDiasTurnoComponent,
     EncuestaComponent,
     DatepipePipe,
-    MedicoPipe
+    
   ],
   imports: [
     CommonModule,
     TurnosRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    SharedModulesModule
     
   ]
 })

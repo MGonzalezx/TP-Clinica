@@ -8,20 +8,20 @@ import { NavbarAdmComponent } from './navbar-adm/navbar-adm.component';
 import { AdministrarTurnosComponent } from './administrar-turnos/administrar-turnos.component';
 //import { RegisterModule } from '../register/register.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { SharedModulesModule } from '../shared-modules/shared-modules.module';
 @NgModule({
   declarations: [
     AdministradorComponent,
     AdministrarEspecialistasComponent,
     NavbarAdmComponent,
     AdministrarTurnosComponent,
-  
   ],
   imports: [
     CommonModule,
     UsuariosRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    SharedModulesModule
     //RegisterModule
   ],exports:[NavbarAdmComponent]
 })

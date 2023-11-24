@@ -28,7 +28,7 @@
   <div class="list-group">
     <div *ngFor="let turno of turnosFiltrados | async">
       <a class="list-group-item list-group-item-action mb-3">
-        <div>
+        <div class="cartitas">
           <div>
             <p>
               Para: <b style="color: darkgreen">{{ turno.Especialidad }}</b>
@@ -48,32 +48,58 @@
             Estado: <b>{{ turno.estado }}</b>
           </p>
 
-          <small
+          <p class="mb-1"
             >Paciente: <i> {{ turno.Paciente }} </i>
-          </small>
+        </p>
           <br />
           <div *ngIf="encuesta && turno.uid === turnoA?.uid">
-            <app-encuesta (encuestaEnviada)="manejarEncuestaEnviada($event)"></app-encuesta>
+            <app-encuesta
+              (encuestaEnviada)="manejarEncuestaEnviada($event)"
+            ></app-encuesta>
           </div>
-          <td style="padding: 2%" *ngIf="
-          turno.estado === 'espera' ||
-          (turno.estado !== 'aceptado' &&
-            turno.estado !== 'cancelado' &&
-            turno.estado !== 'rechazado' &&
-            turno.estado !== 'finalizado')
-        ">
-            <button class="btn btn-success" (click)="cancelarTurno(turno)">Cancelar turno</button>
+          <td
+            style="padding: 2%"
+            *ngIf="
+              turno.estado === 'espera' ||
+              (turno.estado !== 'aceptado' &&
+                turno.estado !== 'cancelado' &&
+                turno.estado !== 'rechazado' &&
+                turno.estado !== 'finalizado')
+            "
+          >
+            <button class="btn btn-success" (click)="cancelarTurno(turno)">
+              Cancelar turno
+            </button>
           </td>
 
-          <td style="padding: 2%" *ngIf="turno.resena !== '' || turno.comentario !== ''" >
-            <button class="btn btn-success" (click)="verResenia(turno)">Ver reseña</button>
+          <td
+            style="padding: 2%"
+            *ngIf="turno.resena !== '' || turno.comentario !== ''"
+          >
+            <button class="btn btn-success" (click)="verResenia(turno)">
+              Ver reseña
+            </button>
           </td>
 
-          <td style="padding: 2%" *ngIf="turno.estado === 'finalizado' && turno.atencion === ''">
-            <button class="btn btn-success" (click)="calificarAtencion(turno)">Calificar Atencion</button>
+          <td
+            style="padding: 2%"
+            *ngIf="turno.estado === 'finalizado' && turno.atencion === ''"
+          >
+            <button class="btn btn-success" (click)="calificarAtencion(turno)">
+              Calificar Atencion
+            </button>
           </td>
-          <td style="padding: 2%" *ngIf="turno.estado === 'finalizado' && turno.resena != '' && turno.encuesta != ''">
-            <button class="btn btn-success" (click)="completarEncuesta(turno)">Completar Encuesta</button>
+          <td
+            style="padding: 2%"
+            *ngIf="
+              turno.estado === 'finalizado' &&
+              turno.resena != '' &&
+              turno.encuesta != ''
+            "
+          >
+            <button class="btn btn-success" (click)="completarEncuesta(turno)">
+              Completar Encuesta
+            </button>
           </td>
         </div>
       </a>
