@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Horario } from 'src/app/clases/horario';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -16,7 +17,7 @@ export class MiPerfilComponent implements OnInit {
   estadoInicialHorarios: any;
 
 
-  constructor(private authService: FirebaseService) {}
+  constructor(private authService: FirebaseService, private router: Router) {}
 
   ngOnInit(): void {
     console.log('hace algo');
@@ -106,5 +107,9 @@ export class MiPerfilComponent implements OnInit {
         }
       }
     }
+  }
+
+  verhistorias(){
+    this.router.navigate(['/historias']);
   }
 }

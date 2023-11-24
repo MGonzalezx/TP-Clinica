@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DatepipePipe } from 'src/app/pipes/datepipe.pipe';
 import { EncuestaComponent } from './encuesta/encuesta.component';
 import { SharedModulesModule } from '../shared-modules/shared-modules.module';
+import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
 @NgModule({
   declarations: [
     MisTurnosComponent,
@@ -19,6 +20,7 @@ import { SharedModulesModule } from '../shared-modules/shared-modules.module';
     ListadoDiasTurnoComponent,
     EncuestaComponent,
     DatepipePipe,
+    HistoriaClinicaComponent,
     
   ],
   imports: [

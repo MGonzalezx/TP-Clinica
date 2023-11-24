@@ -35,6 +35,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Horario } from '../clases/horario';
 import { Encuesta } from '../clases/encuesta';
+import { HistoriaClinica } from '../clases/historia-clinica';
 @Injectable({
   providedIn: 'root'
 })
@@ -413,6 +414,9 @@ export class FirebaseService {
       if (turnoData['resena']) {
         turno.resena = turnoData['resena'];
       }
+      if (turnoData['historiaClinica']) {
+        turno.historiaClinica = turnoData['historiaClinica'];
+      }
       turnos.push(turno);
     });
 
@@ -520,8 +524,62 @@ public async obtenerTurnosDelUsuario(uid: string,tipo: string): Promise<Turno[]>
       resena: turno.resena,
       comentario: turno.comentario,
       atencion:turno.atencion,
-      encuesta:turno.encuesta
+      encuesta:turno.encuesta,
+      historiaClinica: turno.historiaClinica,
     });
   }
  
+  public async obtenerTodasHistoriaClinica(): Promise<HistoriaClinica[]> {
+    const querySnapshot = await getDocs(collection(this.db, 'historiasClinicas'));
+    const historias: HistoriaClinica[] = [];
+
+    querySnapshot.forEach((doc) => {
+        const turnoData = doc.data();
+        const historia = new HistoriaClinica();
+
+        // Utilizando desestructuración y asignación con spread
+        historia.altura = turnoData['altura'];
+        historia.peso = turnoData['peso'];
+        historia.temperatura = turnoData['temperatura'];
+        historia.presion = turnoData['presion'];
+        historia.datosDinamicos = turnoData['datosDinamicos'];
+        historia.idEspecialista = turnoData['idEspecialista'];
+        historia.idPaciente = turnoData['idPaciente'];
+        historia.Paciente = turnoData['Paciente'];
+        historia.Especialista = turnoData['Especialista'];
+
+        // const historia = new HistoriaClinica({...doc.data()});
+
+        historias.push(historia);
+    });
+
+    return historias;
+}
+
+  public async guardarHistoriaClinica(historia: HistoriaClinica) {
+    try {
+        const [paciente, especialista] = await Promise.all([
+            this.getUserByUidAndType(historia.idPaciente, 'pacientes'),
+            this.getUserByUidAndType(historia.idEspecialista, 'especialistas')
+        ]);
+
+        const docRef = await addDoc(collection(this.db, 'historiasClinicas'), {
+          altura: historia.altura,
+          peso: historia.peso,
+          temperatura: historia.temperatura,
+          idPaciente: historia.idPaciente,
+          presion: historia.presion,
+          datosDinamicos: historia.datosDinamicos,
+          idEspecialista: historia.idEspecialista,
+          Paciente:paciente.nombre,
+          Especialista:especialista.nombre
+        });
+
+        console.log('Document written with ID: ', docRef.id);
+        return docRef.id;
+    } catch (e) {
+        console.error('Error adding document: ', e);
+        return false;
+    }
+}
 }

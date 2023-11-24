@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
+import { ListadoHistoriasClinicasComponent } from './components/listado-historias-clinicas/listado-historias-clinicas.component';
 
 
 
@@ -42,6 +43,7 @@ import {MatDividerModule} from '@angular/material/divider';
     HomeComponent,
     NavbarComponent,
     MiPerfilComponent,
+    ListadoHistoriasClinicasComponent,
     //SolicitarTurnoComponent,
    
     

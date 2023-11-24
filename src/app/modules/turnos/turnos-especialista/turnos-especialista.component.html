@@ -1,24 +1,12 @@
 <div class="container">
   <h1>Mis Turnos</h1>
   <div class="mb-3 busqueda">
-    <label for="filtroEspecialidad" class="form-label"
-      >Filtrar por especialidad:</label
-    >
+    <label for="filtro" class="form-label">Buscar:</label>
     <input
-      #filtroEspecialidad
+      #filtro
       type="text"
       class="form-control filtro-busqueda"
-      id="filtroEspecialidad"
-      (input)="filtrarTurnos()"
-    />
-  </div>
-  <div class="mb-3 busqueda">
-    <label for="filtroPaciente" class="form-label">Filtrar por paciente:</label>
-    <input
-      #filtroPaciente
-      type="text"
-      class="form-control filtro-busqueda"
-      id="filtroPaciente"
+      id="filtro"
       (input)="filtrarTurnos()"
     />
   </div>
@@ -100,6 +88,19 @@
               Finalizar turno
             </button>
           </td>
+
+          <div
+            class="form-group"
+            *ngIf="
+              turno?.estado === 'finalizado' && turno.historiaClinica === ''
+            "
+          >
+            <p class="card-text" style="color: red;">
+              Debe completar la historia clinica del paciente...
+            </p>
+            <app-historia-clinica [turno]="turno"></app-historia-clinica>
+          </div>
+
           <td
             style="padding: 2%"
             *ngIf="turno.resena !== '' || turno.comentario !== ''"

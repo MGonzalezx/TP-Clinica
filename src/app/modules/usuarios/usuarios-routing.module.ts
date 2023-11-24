@@ -7,7 +7,7 @@ import { AdministrarTurnosComponent } from './administrar-turnos/administrar-tur
 import { SolicitarTurnoComponent } from 'src/app/components/solicitar-turno/solicitar-turno.component';
 import { MiPerfilComponent } from 'src/app/components/mi-perfil/mi-perfil.component';
 import { authGuard } from 'src/app/guards/auth.guard';
-
+import { ListadoHistoriasClinicasComponent } from 'src/app/components/listado-historias-clinicas/listado-historias-clinicas.component';
 const routes: Routes = [
   { path: '', redirectTo: 'admin', pathMatch: 'full' },
   {
@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'administrar-turnos', component: AdministrarTurnosComponent },
   { path: 'solicitar-turno', component: SolicitarTurnoComponent },
   { path: 'perfil', component: MiPerfilComponent },
+  { path: 'usuarios', component: ListadoHistoriasClinicasComponent },
 ];
 
 @NgModule({
