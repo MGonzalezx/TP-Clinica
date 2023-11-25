@@ -4,13 +4,17 @@ import { Router } from '@angular/router';
 import { Encuesta } from 'src/app/clases/encuesta';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import Swal from 'sweetalert2';
-
+import { openbox } from 'src/app/animations/animation';
 @Component({
   selector: 'app-encuesta',
   templateUrl: './encuesta.component.html',
-  styleUrls: ['./encuesta.component.scss']
+  styleUrls: ['./encuesta.component.scss'],
+  animations: [openbox]
 })
 export class EncuestaComponent {
+
+  isOpen = false;
+
   form!: FormGroup;
   checkError: boolean = false;
   errorMessage: string = '';

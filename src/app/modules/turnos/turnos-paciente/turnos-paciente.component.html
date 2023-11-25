@@ -46,8 +46,8 @@
             >Paciente: <i> {{ turno.Paciente }} </i>
         </p>
           <br />
-          <div *ngIf="encuesta && turno.uid === turnoA?.uid">
-            <app-encuesta
+          <div [@openClose]="isOpen ? true : false" *ngIf="encuesta && turno.uid === turnoA?.uid">
+            <app-encuesta [@openClose]="isOpen ? true : false"
               (encuestaEnviada)="manejarEncuestaEnviada($event)"
             ></app-encuesta>
           </div>

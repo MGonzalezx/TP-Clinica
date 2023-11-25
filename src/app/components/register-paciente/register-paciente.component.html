@@ -226,6 +226,7 @@
           <input
             type="file"
             id="fotoPaciente"
+            accept=".jpg, .jpeg, .png"
             formControlName="fotoPaciente"
             (change)="onImageSelected($event, 1)"
             (click)="resetImageInput(1)"
@@ -238,6 +239,7 @@
           <input
             type="file"
             id="fotoPaciente2"
+            accept=".jpg, .jpeg, .png"
             formControlName="fotoPaciente2"
             (change)="onImageSelected($event, 2)"
             (click)="resetImageInput(2)"

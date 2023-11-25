@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
                 timer: 1500,
               });
               
-              this.router.navigate(['/home']);
+              this.router.navigate(['/home/vista']);
             }
           } else if (especialista.verificado === 'null') {
             Swal.fire({
@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
               timer: 1500,
             });
             
-            this.router.navigate(['/home']);
+            this.router.navigate(['/home/vista']);
           } else if (especialista.verificado === 'false') {
             await this.authService.logout();
             Swal.fire({
@@ -117,7 +117,7 @@ export class LoginComponent implements OnInit {
             });
             
             
-            this.router.navigate(['/home']);
+            this.router.navigate(['/home/vista']);
           } else {
            
             this.mostrarAlertaConfirmacionEmail('Email sin verificar','Verificación','Verifique su casilla de mail para verificar la cuenta').then(()=>{

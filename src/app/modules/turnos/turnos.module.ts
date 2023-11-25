@@ -12,6 +12,7 @@ import { EncuestaComponent } from './encuesta/encuesta.component';
 import { SharedModulesModule } from '../shared-modules/shared-modules.module';
 import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+
 @NgModule({
   declarations: [
     MisTurnosComponent,

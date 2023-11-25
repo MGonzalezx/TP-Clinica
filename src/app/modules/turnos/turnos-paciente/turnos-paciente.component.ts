@@ -1,18 +1,23 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, timeout } from 'rxjs/operators';
 import { Turno } from 'src/app/clases/turno';
 import { AlertasService } from 'src/app/services/alertas.service';
 import { Encuesta } from 'src/app/clases/encuesta';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { openbox } from 'src/app/animations/animation';
 @Component({
   selector: 'app-turnos-paciente',
   templateUrl: './turnos-paciente.component.html',
-  styleUrls: ['./turnos-paciente.component.scss']
+  styleUrls: ['./turnos-paciente.component.scss'],
+  animations: [openbox]
 })
 export class TurnosPacienteComponent{
+
+  isOpen = false;
+
   turnos: any[] = [];
   turnoA: Turno | null = null;
   @Input() pacienteId: string = '';
@@ -149,8 +154,24 @@ export class TurnosPacienteComponent{
   }
 
   completarEncuesta(turno : Turno) {
-    this.encuesta = true;
+    // setTimeout(() =>{
+    //   this.encuesta = !this.encuesta;
+    // },500)
+    
+    setTimeout(() =>{
+      this.isOpen = !this.isOpen;
+    },150)
+    setTimeout(() =>{
+      this.encuesta = !this.encuesta;
+    },100)
+   
+   
+   
     this.turnoA = turno;
+    console.log(this.encuesta);
+    console.log(this.turnoA);
+    
+    
   }
 
   calificarAtencion(turno: Turno){

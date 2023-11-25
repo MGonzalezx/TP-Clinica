@@ -1,4 +1,4 @@
-<app-navbar-adm></app-navbar-adm>
+
 <div class="container">
     <h2>Especialistas Pendientes de Aprobación</h2>
     <div class="row">
@@ -71,6 +71,12 @@
               <p class="card-text">Edad: {{ especialista.edad }}</p>
               <p class="card-text">DNI: {{ especialista.dni }}</p>
               <p class="btn btn-success">Especialista Aceptado</p>
+              <button
+                  (click)="rechazarEspecialista(especialista)"
+                  class="btn btn-danger m-2"
+                >
+                  Remover autoridad
+                </button>
             </div>
           </div>
         </div>
@@ -103,6 +109,12 @@
               <p class="card-text">DNI: {{ especialista.dni }}</p>
               <div *ngIf="especialista.verificado === 'null'">
                 <p class="btn btn-danger">Especialista Rechazado</p>
+                <button
+                (click)="aceptarEspecialista(especialista)"
+                class="btn btn-danger m-2"
+              >
+                Remover el rechazo
+              </button>
               </div>
             </div>
           </div>

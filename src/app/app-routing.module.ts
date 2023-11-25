@@ -7,10 +7,11 @@ import { authGuard } from './guards/auth.guard';
 import { MiPerfilComponent } from './components/mi-perfil/mi-perfil.component';
 //import { adminGuard } from './guards/admin.guard copy';
 import { ListadoHistoriasClinicasComponent } from './components/listado-historias-clinicas/listado-historias-clinicas.component';
+import { HomeVistaComponent } from './components/home-vista/home-vista.component';
 
 const routes: Routes = [
-  { path: 'bienvenida', component: BienvenidaComponent,data: {animation: 'BienvenidaPage'}},
-  { path: 'login', component: LoginComponent, data: { animation: 'HomeLoginPagePage' } },
+  { path: 'bienvenida', component: BienvenidaComponent},
+  { path: 'login', component: LoginComponent },
   {
     path: 'home',
     component: HomeComponent,
@@ -23,6 +24,7 @@ const routes: Routes = [
       { path: 'perfil', component: MiPerfilComponent },
       { path: 'pacientes', component: ListadoHistoriasClinicasComponent },
       { path: 'historias', component: ListadoHistoriasClinicasComponent },
+      { path: 'vista', component: HomeVistaComponent },
     ],
   },
 

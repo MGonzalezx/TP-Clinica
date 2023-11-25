@@ -144,7 +144,7 @@ export class SolicitarTurnoComponent implements OnInit {
   filtrarEspecialistas() {
     this.especialistasFiltrados = this.especialistas.filter(
       (especialista: any) =>
-        especialista.especialidades.includes(this.especialidadSeleccionada)
+        especialista.especialidades.includes(this.especialidadSeleccionada) && especialista.verificado == 'true'
     );
   }
 

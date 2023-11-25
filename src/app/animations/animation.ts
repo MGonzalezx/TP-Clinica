@@ -1,52 +1,28 @@
-import { animate, animateChild, group, query, style, transition, trigger } from "@angular/animations";
+import { animate, style, transition, trigger, state } from "@angular/animations";
 
 export const slideInAnimation =
-  trigger('routeAnimations', [
-    transition('HomePage <=> AboutPage', [
-      style({ position: 'relative' }),
-      query(':enter, :leave', [
-        style({
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%'
-        })
-      ]),
-      query(':enter', [
-        style({ left: '-100%' })
-      ], { optional: true }),
-      query(':leave', animateChild(), { optional: true }),
-      group([
-        query(':leave', [
-          animate('300ms ease-out', style({ left: '100%' }))
-        ], { optional: true }),
-        query(':enter', [
-          animate('300ms ease-out', style({ left: '0%' }))
-        ], { optional: true }),
-      ]),
+  trigger('slideInAnimation', [
+    transition(':enter', [
+      style({ position: 'absolute', left: '-100%', width: '100%' }),
+      animate('300ms ease-out', style({ left: '0%' }))
     ]),
-    transition('* <=> *', [
-      style({ position: 'relative' }),
-      query(':enter, :leave', [
-        style({
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%'
-        })
-      ], { optional: true }),
-      query(':enter', [
-        style({ left: '-100%' })
-      ], { optional: true }),
-      query(':leave', animateChild(), { optional: true }),
-      group([
-        query(':leave', [
-          animate('200ms ease-out', style({ left: '100%', opacity: 0 }))
-        ], { optional: true }),
-        query(':enter', [
-          animate('300ms ease-out', style({ left: '0%' }))
-        ], { optional: true }),
-        query('@*', animateChild(), { optional: true })
-      ]),
+    transition(':leave', [
+      style({ position: 'absolute', left: '0%', width: '100%' }),
+      animate('200ms ease-out', style({ left: '100%', opacity: 0 }))
     ])
   ]);
+
+  export const rotateInAnimation =
+  trigger('rotatedState', [
+    state('default', style({ transform: 'rotate(0)' })),
+    state('rotated', style({ transform: 'rotate(-360deg)' })),
+    transition('rotated => default', animate('2000ms ease-out')),
+    transition('default => rotated', animate('2000ms ease-in'))
+])
+
+export const openbox =
+trigger('openClose', [
+  state('true', style({ height: '*' })),
+  state('false', style({ height: '0px' })),
+  transition('false <=> true', [ animate(500) ])
+])
