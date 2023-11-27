@@ -110,6 +110,6 @@ export class MiPerfilComponent implements OnInit {
   }
 
   verhistorias(){
-    this.router.navigate(['/historias']);
+    this.router.navigate(['home/historias']);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl,FormArray,FormBuilder,FormControl,FormGroup,Validators} from '@angular/forms';
 import { HistoriaClinica } from 'src/app/clases/historia-clinica';
 import { Turno } from 'src/app/clases/turno';
 import { AlertasService } from 'src/app/services/alertas.service';
@@ -16,43 +16,68 @@ export class HistoriaClinicaComponent {
   form: FormGroup;
   @Input() turno: Turno | null = null;
 
-  constructor(private firestoreService: FirebaseService, private alertas: AlertasService) {
-    this.form = new FormGroup({
-      altura: new FormControl('', [
-        Validators.required,
-        Validators.min(100),
-        Validators.max(230),
-      ]),
-      peso: new FormControl('', [
-        Validators.required,
-        Validators.min(1),
-        Validators.max(200),
-      ]),
-      temperatura: new FormControl('', [
-        Validators.required,
-        Validators.min(34),
-        Validators.max(42),
-      ]),
-      presion: new FormControl('', Validators.required),
-      datosDinamicos: new FormGroup({
-        clave: new FormControl(null, Validators.required),
-        valor: new FormControl(null, Validators.required),
-      }),
+  constructor(
+    private firestoreService: FirebaseService,
+    private fb: FormBuilder,
+    private alertas: AlertasService
+  ) {
+    this.form = this.fb.group({
+      altura: ['',[Validators.required, Validators.min(100), Validators.max(230)],],
+      peso: ['', [Validators.required, Validators.min(1), Validators.max(200)]],
+      temperatura: ['',[Validators.required, Validators.min(34), Validators.max(42)],],
+      presion: ['', Validators.required],
+      datosDinamicos: this.fb.array([]),
     });
+  }
+
+  agregarDatoDinamico() {
+    const datosDinamicos = this.form.get('datosDinamicos') as FormArray;
+
+    if (datosDinamicos && datosDinamicos.length < 3) {
+      const nuevoDato = this.fb.group({
+        clave: [null, Validators.required],
+        valor: [null, Validators.required],
+      });
+      datosDinamicos.push(nuevoDato);
+    }
+  }
+
+  quitarDatoDinamico(index: number) {
+    const datosDinamicos = this.form.get('datosDinamicos') as FormArray;
+
+    if (datosDinamicos) {
+      datosDinamicos.removeAt(index);
+    }
+  }
+
+  isFormArray(control: AbstractControl | null): control is FormArray {
+    return control instanceof FormArray;
+  }
+
+  getDatosDinamicosControls(): AbstractControl[] {
+    const formArray = this.form.get('datosDinamicos') as FormArray;
+    return formArray ? formArray.controls : [];
   }
 
   async onSubmit() {
     if (this.form.valid && this.turno) {
       this.historiaClinica = this.form.value;
-      this.historiaClinica.idPaciente = this.turno.idPaciente;
-      this.historiaClinica.idEspecialista = this.turno.idEspecialista;
+      const datosDinamicosObj: any = {};
+      for (const dato of (this.form.get('datosDinamicos') as FormArray)
+        .controls) {
+        const { clave, valor } = dato.value;
+        datosDinamicosObj[clave] = valor;
+      }
+
+      this.historiaClinica.datosDinamicos = datosDinamicosObj;
+      
       console.log(this.historiaClinica);
       let id = await this.firestoreService.guardarHistoriaClinica(
         this.historiaClinica
       );
       if (id) {
         try {
-          this.turno.historiaClinica = id;
+          this.turno.historiaClinica = this.historiaClinica;
           console.log(this.turno);
           await this.firestoreService.modificarTurno(this.turno);
           this.alertas.mostraAlertaSimpleSuccess('Historia clinica cargada','Completado');

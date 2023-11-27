@@ -543,8 +543,6 @@ public async obtenerTurnosDelUsuario(uid: string,tipo: string): Promise<Turno[]>
         historia.temperatura = turnoData['temperatura'];
         historia.presion = turnoData['presion'];
         historia.datosDinamicos = turnoData['datosDinamicos'];
-        historia.idEspecialista = turnoData['idEspecialista'];
-        historia.idPaciente = turnoData['idPaciente'];
         historia.Paciente = turnoData['Paciente'];
         historia.Especialista = turnoData['Especialista'];
 
@@ -558,21 +556,13 @@ public async obtenerTurnosDelUsuario(uid: string,tipo: string): Promise<Turno[]>
 
   public async guardarHistoriaClinica(historia: HistoriaClinica) {
     try {
-        const [paciente, especialista] = await Promise.all([
-            this.getUserByUidAndType(historia.idPaciente, 'pacientes'),
-            this.getUserByUidAndType(historia.idEspecialista, 'especialistas')
-        ]);
+       
 
         const docRef = await addDoc(collection(this.db, 'historiasClinicas'), {
           altura: historia.altura,
           peso: historia.peso,
           temperatura: historia.temperatura,
-          idPaciente: historia.idPaciente,
-          presion: historia.presion,
           datosDinamicos: historia.datosDinamicos,
-          idEspecialista: historia.idEspecialista,
-          Paciente:paciente.nombre,
-          Especialista:especialista.nombre
         });
 
         console.log('Document written with ID: ', docRef.id);
