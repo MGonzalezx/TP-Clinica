@@ -2,6 +2,14 @@
   color: red;
 }
 
+h1{
+  font-size: 3em; // Ajusta el tamaño del texto según tus preferencias
+  text-align: center; // Centra el texto
+  margin: 20px 0; // Ajusta el margen según tus preferencias
+ 
+  display: inline-block;
+}
+
 .container{
   align-items: center;
 }
@@ -56,7 +64,12 @@
   }
 
 .diva {
-  width: 100px;
+  // width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center; // Alinea el texto en el centro
 }
 .button-style:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
@@ -69,4 +82,10 @@
   font-size: 16px;
   background-color: aliceblue;
   border-radius: 5px;
+  margin: 0;
+}
+
+.container-especialista{
+  border: solid 1px;
+  background-color: rgba(250, 235, 215, 0.582);
 }

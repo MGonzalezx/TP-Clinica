@@ -1,0 +1,111 @@
+
+
+.card {
+  margin: 2rem auto;
+  width: 32rem;
+  background-color: antiquewhite;
+  border: 1px solid #dee2e6;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .row {
+    img {
+      width: 50%;
+      height: auto;
+      border-radius: 15px 0 0 15px;
+      transition: transform 0.3s ease-in-out;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &:first-child {
+        border-radius: 0 15px 15px 0;
+      }
+    }
+  }
+
+  .card-body {
+    padding: 1.5rem;
+
+    h5 {
+      color: #343a40;
+    }
+
+    p {
+      color: #495057;
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  .col-sm-10 {
+    margin-top: 1.5rem;
+
+    .row {
+      .col-sm-3 {
+        button {
+          background-color: #007bff;
+          color: #fff;
+          transition: background-color 0.3s ease-in-out;
+
+          &:hover {
+            background-color: #0056b3;
+          }
+
+          p {
+            margin-top: 0.5rem;
+          }
+
+          img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.row-filtrar {
+  margin-top: 1.5rem;
+  margin-left: 1.5rem;
+
+  .col-especialista {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    button {
+      background-color: #28a745;
+      color: #fff;
+      border: 1px solid #28a745;
+      border-radius: 10px;
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover {
+        background-color: #218838;
+      }
+
+      p {
+        margin-top: 0.5rem;
+        font-weight: bold;
+      }
+
+      img {
+        border-radius: 10px;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}

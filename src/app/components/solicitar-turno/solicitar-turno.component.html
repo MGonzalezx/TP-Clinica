@@ -1,10 +1,10 @@
-<div class="container mt-3">
-  <h1 class="mb-3">Datos del turno</h1>
+<div class="container mt-3" style="caret-color: transparent;">
+  <h1 class="mb-3">SOLICITAR TURNO</h1>
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="row g-3">
-      <div>
-        <div class="" >
-          <h2 for="especialista" class="form-label">Especialista:</h2>
+      <div >
+        <div class="container-especialista" >
+          <h2 for="especialista" class="form-label ml-1">Especialista:</h2>
           <div class="row">
             <div
               *ngFor="let especialista of especialistas"
@@ -29,7 +29,7 @@
           </div>
         </div>
 
-        <div *ngIf="especialistaSeleccionado" class="especialidades">
+        <div *ngIf="especialistaSeleccionado" class="especialidades container-especialista">
           <h2 for="especialidad" class="form-label">Especialidad:</h2>
           <div class="row">
             <div
@@ -59,7 +59,8 @@
         </div>
       </div>
 
-      <div *ngIf="especialidadSeleccionada">
+      <div *ngIf="especialidadSeleccionada" class="container-especialista">
+        <h2 for="especialista" class="form-label ml-1">Horarios:</h2>
         <div *ngIf="especialista">
           <div class="col-sm-6">
             <app-listado-dias-turno

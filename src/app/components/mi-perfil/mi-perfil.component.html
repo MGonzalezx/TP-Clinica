@@ -1,4 +1,9 @@
-<div [@slideInAnimation] *ngIf="usuario" class="">
+<div
+  [@slideInAnimation]
+  *ngIf="usuario"
+  class="container"
+  style="caret-color: transparent"
+>
   <div *ngIf="identidad === 'admin'">
     <div class="card m-5" style="width: 32rem">
       <img
@@ -8,7 +13,7 @@
         height="300"
       />
       <div class="card-body">
-        <h5 class="card-title">{{ usuario.nombre }} {{ usuario.apellido }}</h5>
+        <h2 class="card-title">{{ usuario.nombre }} {{ usuario.apellido }}</h2>
         <p class="card-text">DNI: {{ usuario.dni }}</p>
         <p class="card-text">Edad: {{ usuario.edad }}</p>
       </div>
@@ -34,7 +39,7 @@
         />
       </div>
       <div class="card-body">
-        <h5 class="card-title">{{ usuario.nombre }} {{ usuario.apellido }}</h5>
+        <h2 class="card-title">{{ usuario.nombre }} {{ usuario.apellido }}</h2>
         <p class="card-text">DNI: {{ usuario.dni }}</p>
         <p class="card-text">Edad: {{ usuario.edad }}</p>
         <p class="card-text">Obra Social: {{ usuario.obraSocial }}</p>
@@ -46,10 +51,9 @@
         </button>
       </div>
     </div>
-    <!-- (click)="onEspecialistaChange(especialista.uid)" -->
-    <div *ngIf="filtrar" class="col-sm-10">
-      <div class="row">
-        <div *ngFor="let especialista of especialistasT" class="col-sm-3 m-1">
+    <div *ngIf="filtrar">
+      <div class="row row-filtrar">
+        <div *ngFor="let especialista of especialistasT" class="col-sm-3 ml-5 col-especialista">
           <button
             class="btn btn-primary"
             type="button"
@@ -79,7 +83,7 @@
         height="300"
       />
       <div class="card-body">
-        <h5 class="card-title">{{ usuario.nombre }} {{ usuario.apellido }}</h5>
+        <h2 class="card-title">{{ usuario.nombre }} {{ usuario.apellido }}</h2>
         <p class="card-text">DNI: {{ usuario.dni }}</p>
         <p class="card-text">Edad: {{ usuario.edad }}</p>
         <p class="card-text">Especialidades:</p>
@@ -138,7 +142,7 @@
           Tienes cambios sin guardar
         </p>
         <p></p>
-        <button  class="btn btn-primary" (click)="guardar()">Guardar</button>
+        <button class="btn btn-primary" (click)="guardar()">Guardar</button>
       </div>
     </div>
   </div>

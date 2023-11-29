@@ -9,12 +9,13 @@
 </ngx-spinner>
   <h1>Mis Turnos</h1>
   <div class="mb-3 busqueda">
-    <label for="filtro" class="form-label">Buscar:</label>
+    <label for="filtro" class="form-label" >Buscar:</label>
     <input
       #filtro
       type="text"
       class="form-control filtro-busqueda"
       id="filtro"
+      style="caret-color: black;"
       (input)="filtrarTurnos()"
     />
   </div>
