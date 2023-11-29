@@ -16,7 +16,7 @@ Los profesionales pueden cambiar la duración según su especialidad. Estos prof
 También contamos con un sector dentro de la clínica que se encarga de la organización y administración de la misma."
 </i>
 
-## Primeros pasos en la clinica
+## Guia de usuario
 
 En primer lugar te encontraras con una pagina de bienvenida donde se encuentra el logo de la clinica y un slogan. En la parte inferior del slogan se observas dos opciones: un Inicio de sesion y un Registro donde podras registrate.
 
@@ -25,7 +25,7 @@ En primer lugar te encontraras con una pagina de bienvenida donde se encuentra e
 
 ## Registro
 
-Aca podes elegir si queres registrar un paciente o especialista
+En esta sección podrás registrarte como paciente o especialista.
 
 ![registro](src/assets/Img_readme/Registro.PNG)
 
@@ -37,7 +37,7 @@ Se piden los datos necesarios para integrar un paciente al sistema, este debe ag
 
 ## Especialista - Registro
 
-Se piden los datos necesarios para integrar un especialista al sistema, este debe agregar una foto y seleccionar sus especialidades
+Se piden los datos necesarios para integrar un especialista al sistema, este debe agregar una foto y seleccionar sus especialidades. Si estas no existen, podrá agregarlas individualmente. 
 
 ![registro-especialista](src/assets/Img_readme/registroEspecialista.PNG)
 
@@ -47,6 +47,46 @@ Aca se ingresa el mail y contraseña, ademas tenemos accesos rapidos a diferente
 
 ![inicio-sesion](src/assets/Img_readme/InicioSesion.PNG)
 
+## Solicitar Turno
+
+Comienza mostrando los profesionales, en botones redondos, con la imagen del mismo y su nombre arriba del botón.
+
+![solicitar-turno-especialista](src/assets/Img_readme/solicitarTurnoEspecialista.PNG)
+
+Una vez seleccionado mostrará las especialidades, en botones cuadrados con bordes redondeados, con la imagen de la especialidad. En caso de no tener muestra imagen por default.
+
+![solicitar-turno-especialidades](src/assets/Img_readme/solicitarTurnoEspecialidades.PNG)
+
+
+Una vez seleccionada la especialidad, aparecerán los días con turnos disponibles para ese PROFESIONAL. Estos botones deben ser rectangulares. Formato (2021-09-09).
+Seleccionado el día mostrará los horarios disponibles. Estos botones deben ser cuadrados con bordes redondeados. Formato 13:15.
+
+![solicitar-turno-horarios](src/assets/Img_readme/solicitarTurnoHorarios.PNG)
+
+Una vez seleccionado todo lo necesario, podrás reservar el turno con el botón "Registrar turno" abajo de la pantalla. 
+
+## Mis Turnos
+
+Se muestran todos los turnos permitiendo buscar por todos los campos del mismo, dia, hora, especialista, especialidad, etc. Tambien en caso de ser paciente se pueden cancelar, calificar, ver reseña/comentario y completar una encuesta, y en el caso de ser especialista se puede aceptar o rechazar, una vez aceptado se puede cancelar, finalizar, una vez que el turno finaliza el especialista debera completar la historia clinica y dar una reseña.
+
+![mis-turnos-paciente](src/assets/Img_readme/misTurnosPaciente.PNG)
+
+![mis-turnos-especialista](src/assets/Img_readme/misTurnosEspecialista.PNG)
+
+
+## Mi Perfil
+
+Podremos ver los datos del usuario conectado. Adicionalmente, si es un paciente, podremos acceder a la historia clinica y en el caso de los especialistas a los horarios de estos.
+
+### Paciente
+![mi-perfil-paciente](src/assets/Img_readme/miPerfilPaciente.PNG)
+
+### Especialista
+![mi-perfil-paciente](src/assets/Img_readme/miPerfilEspecialista.PNG)
+
+## Historia Clinica
+
+Se ven las historias clinicas del paciente permitiendo descargar la informacion en formato pdf. En el caso del adminsitrador podra descargar las historias clinicas en formato xlsx (excel).
 
 ## :sunglasses: Administracion (Admin) :sunglasses:
 
@@ -62,13 +102,11 @@ Podrá registrar un nuevo turno seleccionando Especialista y Paciente
 
 ### Usuarios
 
-Veras todos los usuarios dentro del sistema.
-
 Se podra habilitar/deshabilitar especialistas en el sistema
 
 Podrá agregar un nuevo administrador en categoría Administradores
 
-### Añadir Adm
+### Añadir Admin
 
 Sólo aqui se podra registrar usuarios de tipo Administrador
 
