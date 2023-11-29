@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { rotateInAnimation } from 'src/app/animations/animation';
+import { rotateInAnimation, slideInAnimation } from 'src/app/animations/animation';
 @Component({
   selector: 'app-home-vista',
   templateUrl: './home-vista.component.html',
   styleUrls: ['./home-vista.component.scss'],
-  animations:[rotateInAnimation]
+  animations:[rotateInAnimation, slideInAnimation]
 })
 export class HomeVistaComponent {
   state: string = 'default';

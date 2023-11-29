@@ -3,26 +3,27 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
     <div class="row g-3">
       <div>
-        <div class="especialistas" >
+        <div class="" >
           <h2 for="especialista" class="form-label">Especialista:</h2>
           <div class="row">
             <div
               *ngFor="let especialista of especialistas"
-              class="botones col-sm-3 m-1"
+              class="diva  m-2"
             >
-              <h4 class="nombres">{{ especialista.nombre }}</h4>
+              <p class="texto m-1">{{ especialista.nombre }}</p>
               <br />
               <button
-                class="btn btn-primary botonesEspecialistas"
+                class="btn btn-light button-style"
                 type="button"
                 id="{{ especialista.uid }}"
+                [style.backgroundImage]="'url('+especialista.foto1+')'"
                 (click)="onEspecialistaChange(especialista.uid)"
               >
-                <img
+                <!-- <img
                   [src]="especialista.foto1"
                   alt="Imagen de {{ especialista.nombre }}"
                   class="img-fluid especialista-img"
-                />
+                /> -->
               </button>
             </div>
           </div>
