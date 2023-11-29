@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="caret-color: transparent;">
   <h2 class="mb-3">Datos del paciente</h2>
   <form (ngSubmit)="onSubmit()" [formGroup]="form" class="needs-validation">
     <div class="row g-3">
@@ -33,6 +33,7 @@
           id="pacienteNombre"
           placeholder=""
           formControlName="pacienteNombre"
+          style="caret-color: black;"
         />
         <div *ngIf="form.controls['pacienteNombre'].errors != null">
           <small
@@ -57,6 +58,7 @@
           id="pacienteApellido"
           placeholder=""
           formControlName="pacienteApellido"
+          style="caret-color: black;"
         />
         <div *ngIf="form.controls['pacienteApellido'].errors != null">
           <small
@@ -79,6 +81,7 @@
           id="pacienteEdad"
           placeholder=""
           formControlName="pacienteEdad"
+          style="caret-color: black;"
         />
         <div *ngIf="form.controls['pacienteEdad'].errors != null">
           <small
@@ -113,6 +116,7 @@
           id="pacienteDni"
           placeholder=""
           formControlName="pacienteDni"
+          style="caret-color: black;"
         />
         <div *ngIf="form.controls['pacienteDni'].errors != null">
           <small
@@ -150,6 +154,7 @@
           class="form-control"
           placeholder="ejemplo@ejemplo.com"
           formControlName="pacienteEmail"
+          style="caret-color: black;"
           #emailInput
         />
         <div *ngIf="form.controls['pacienteEmail'].errors != null">
@@ -181,6 +186,7 @@
           class="form-control"
           placeholder="Ingrese su contraseña"
           formControlName="pacienteClave"
+          style="caret-color: black;"
           #passwordInput
         />
         <div *ngIf="form.controls['pacienteClave'].errors != null">
@@ -205,6 +211,7 @@
           id="pacienteObraSocial"
           placeholder=""
           formControlName="pacienteObraSocial"
+          style="caret-color: black;"
         />
         <div *ngIf="form.controls['pacienteObraSocial'].errors != null">
           <small

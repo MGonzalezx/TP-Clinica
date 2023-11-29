@@ -1,0 +1,49 @@
+.container {
+    margin-top: 20px;
+  
+    h2 {
+      margin-bottom: 10px;
+    }
+  
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  
+    .card {
+      width: 100%;
+      margin-bottom: 20px;
+  
+      img {
+        width: 100%;
+        object-fit: cover;
+      }
+  
+      .card-body {
+        padding: 15px;
+  
+        h5 {
+          margin-bottom: 10px;
+        }
+
+        h3 {
+            margin-bottom: 10px;
+          }
+  
+        p {
+          margin-bottom: 5px;
+        }
+  
+        ul {
+          margin-bottom: 10px;
+          padding-left: 20px;
+        }
+  
+        button {
+          cursor: pointer;
+        }
+        background-color: antiquewhite;
+      }
+    }
+  }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="caret-color: transparent;">
     <h2 class="mb-3">Datos del especialista</h2>
     <form (ngSubmit)="onSubmit()" [formGroup]="form" class="needs-validation">
       <div class="row g-3">
@@ -12,6 +12,7 @@
             id="especialistaNombre"
             placeholder=""
             formControlName="especialistaNombre"
+            style="caret-color: black;"
           />
           <div *ngIf="form.controls['especialistaNombre'].errors != null">
             <small
@@ -36,6 +37,7 @@
             id="especialistaApellido"
             placeholder=""
             formControlName="especialistaApellido"
+            style="caret-color: black;"
           />
           <div *ngIf="form.controls['especialistaApellido'].errors != null">
             <small
@@ -60,6 +62,7 @@
             id="especialistaEdad"
             placeholder=""
             formControlName="especialistaEdad"
+            style="caret-color: black;"
           />
           <div *ngIf="form.controls['especialistaEdad'].errors != null">
             <small
@@ -96,6 +99,7 @@
             id="especialistaDni"
             placeholder=""
             formControlName="especialistaDni"
+            style="caret-color: black;"
           />
           <div *ngIf="form.controls['especialistaDni'].errors != null">
             <small
@@ -133,6 +137,7 @@
             class="form-control"
             placeholder="ejemplo@ejemplo.com"
             formControlName="especialistaEmail"
+            style="caret-color: black;"
             #emailInput
           />
           <div *ngIf="form.controls['especialistaEmail'].errors != null">
@@ -164,6 +169,7 @@
             class="form-control"
             placeholder="Ingrese su contraseña"
             formControlName="especialistaClave"
+            style="caret-color: black;"
             #passwordInput
           />
           <div *ngIf="form.controls['especialistaClave'].errors != null">
@@ -212,6 +218,7 @@
                 type="text"
                 class="form-control"
                 formControlName="OtraEspecialidad"
+                style="caret-color: black;"
               />
             </div>
             <button

@@ -1,4 +1,4 @@
-<div class="container mt-3">
+<div class="container mt-3 " style="caret-color: transparent;">
     <h2 class="mb-3">Datos del administrador</h2>
     <form (ngSubmit)="onSubmit()" [formGroup]="form" >
       <div class="row g-3">
@@ -24,6 +24,7 @@
             id="adminNombre"
             placeholder=""
             formControlName="adminNombre"
+            style="caret-color: black;"
           />
           <div *ngIf="form.controls['adminNombre'].errors != null">
             <small
@@ -48,6 +49,7 @@
             id="adminApellido"
             placeholder=""
             formControlName="adminApellido"
+            style="caret-color: black;"
           />
           <div *ngIf="form.controls['adminApellido'].errors != null">
             <small
@@ -72,6 +74,7 @@
             id="adminEdad"
             placeholder=""
             formControlName="adminEdad"
+            style="caret-color: black;"
           />
           <div *ngIf="form.controls['adminEdad'].errors != null">
             <small
@@ -108,6 +111,7 @@
             id="adminDni"
             placeholder=""
             formControlName="adminDni"
+            style="caret-color: black;"
           />
           <div *ngIf="form.controls['adminDni'].errors != null">
             <small
@@ -145,6 +149,7 @@
             class="form-control"
             placeholder="ejemplo@ejemplo.com"
             formControlName="adminEmail"
+            style="caret-color: black;"
             #emailInput
           />
           <div *ngIf="form.controls['adminEmail'].errors != null">
@@ -176,6 +181,7 @@
             class="form-control"
             placeholder="Ingrese su contraseña"
             formControlName="adminClave"
+            style="caret-color: black;"
             #passwordInput
           />
           <div *ngIf="form.controls['adminClave'].errors != null">

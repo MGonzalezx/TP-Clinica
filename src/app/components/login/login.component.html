@@ -1,13 +1,13 @@
 
-<div [@slideInAnimation] class="login-page">
-  <div class="form">
+<div [@slideInAnimation] class="login-page" >
+  <div class="form" style="caret-color: transparent;" >
     <form
       class="form-group"
       (ngSubmit)="onSubmit()"
       [formGroup]="form"
       class="form-signin"
     >
-      <h1>Iniciar Sesion</h1>
+      <h1 style="caret-color: transparent;" >Iniciar Sesion</h1>
       <br />
 
       <input
@@ -16,6 +16,7 @@
         class="form-control"
         placeholder="Email"
         formControlName="email"
+        style="caret-color: black;" 
       />
       <div *ngIf="form.controls['email'].errors != null">
         <small
@@ -41,6 +42,7 @@
         class="form-control"
         placeholder="Contraseña"
         formControlName="password"
+        style="caret-color: black;"
       />
       <div *ngIf="form.controls['password'].errors != null">
         <small
