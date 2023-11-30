@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Especialidad } from 'src/app/clases/especialidad';
 import { Especialista } from 'src/app/clases/especialista';
 import { Paciente } from 'src/app/clases/paciente';
 import { FirebaseService } from 'src/app/services/firebase.service';

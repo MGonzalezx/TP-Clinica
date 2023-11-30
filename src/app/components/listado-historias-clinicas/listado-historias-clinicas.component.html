@@ -65,7 +65,6 @@
     </div>
   </div>
 
-  
   <div *ngIf="identidad === 'admin'">
     <div class="card mb-3">
       <ng-container *ngFor="let historia of historiasClinicasUnicas">
@@ -81,12 +80,10 @@
               class="btn btn-light button-style"
               [style.backgroundImage]="'url(' + historia.fotoPaciente + ')'"
             ></button>
-           
           </div>
         </div>
       </ng-container>
     </div>
-   
   </div>
 
   <ng-template #noHistorias>

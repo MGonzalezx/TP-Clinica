@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { HistoriaClinica } from 'src/app/clases/historia-clinica';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { HttpClient } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
@@ -17,6 +15,7 @@ import { slideInAnimation } from 'src/app/animations/animation';
   styleUrls: ['./listado-historias-clinicas.component.scss'],
   animations:[slideInAnimation]
 })
+
 export class ListadoHistoriasClinicasComponent {
   identidad: string | null = '';
   usuario: any = null;
@@ -46,14 +45,14 @@ export class ListadoHistoriasClinicasComponent {
   }
 
   descargarHistoriasClinicas(Turnos: Turno[]) {
-    // Convertir cada historia clínica en un objeto que se pueda convertir a Excel
+    // Convetimos cada historia clínica en un objeto que se pueda convertir a Excel
     const historiasClinicasArray = Turnos.map((turno) => {
-      // Crear una copia de historiaClinica para no modificar el objeto original
+      // Creamos una copia de historiaClinica para no modificar el objeto original
       let historiaClinicaCopia: Partial<Turno> = {
         ...turno,
       };
 
-      // Eliminar los campos que no quieres incluir
+      // Eliminamos los campos que no queremos incluir
 
       // Desglosar el objeto datosDinamicos en propiedades individuales
       let datosDinamicosDesglosados: { [clave: string]: any } = {};

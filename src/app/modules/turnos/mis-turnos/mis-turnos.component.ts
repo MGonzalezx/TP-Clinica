@@ -1,17 +1,7 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { Router } from '@angular/router';
-import { Especialidad } from 'src/app/clases/especialidad';
-import { Especialista } from 'src/app/clases/especialista';
-import { Paciente } from 'src/app/clases/paciente';
-import { Turno } from 'src/app/clases/turno';
+import { Component } from '@angular/core';
+
 import { FirebaseService } from 'src/app/services/firebase.service';
-import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-mis-turnos',

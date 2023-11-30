@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -43,7 +42,7 @@ export class RegisterEspecialistaComponent {
         Validators.min(1),
         Validators.max(100000000),
       ]),
-      //especialistaEspecialidad: new FormControl('', [Validators.required]),
+      
       OtraEspecialidad: new FormControl(''),
       agregarOtraEspecialidad: new FormControl(''),
       especialistaEmail: new FormControl('', [
@@ -91,15 +90,10 @@ export class RegisterEspecialistaComponent {
     });
   }
 
-  // seleccionarEspecialidad(especialidad: Especialidad) {
-  //   this.especialidadSeleccionada = especialidad;
-  //   this.form.controls['especialistaEspecialidad'].setValue(
-  //     especialidad.nombre
-  //   );
-  // }
+  
 
   async agregarEspecialidad() {
-    //const especialidadNombre = this.form.controls['especialistaEspecialidad'].value.trim();
+    
     const especialidadNombre = this.form.controls['OtraEspecialidad'].value.trim();
     if (especialidadNombre !== '') {
       await this.authService.guardarEspecialidad(especialidadNombre);

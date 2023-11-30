@@ -3,13 +3,6 @@ import { Router } from '@angular/router';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import Swal from 'sweetalert2';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { slideInAnimation } from 'src/app/animations/animation';
 
 @Component({
@@ -135,12 +128,6 @@ export class LoginComponent implements OnInit {
               
             });
            
-            // Swal.fire({
-            //   icon: 'warning',
-            //   title: 'Verifique su email',
-            //   text: 'Por favor, verifique su correo electrónico para continuar.',
-            //   timer: 4000,
-            // });
           }
         }
       }

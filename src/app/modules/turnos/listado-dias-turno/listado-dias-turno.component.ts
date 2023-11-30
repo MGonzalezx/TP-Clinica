@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Especialista } from 'src/app/clases/especialista';
 import { Turno } from 'src/app/clases/turno';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-listado-dias-turno',
   templateUrl: './listado-dias-turno.component.html',
@@ -54,7 +53,6 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
     }
     if (changes['especialista']) {
       
-     // const previo = changes['especialista'].previousValue;
       const actual = changes['especialista'].currentValue;
       
       this.especialista = actual;
@@ -86,15 +84,6 @@ export class ListadoDiasTurnoComponent implements OnInit, OnChanges {
   }
 
   obtenerFechaFormateada(fecha: Date): string {
-    // const opcionesFecha = {
-    //   weekday: 'long',
-    //   year: 'numeric',
-    //   month: '2-digit',
-    //   day: '2-digit'
-     
-     
-    // } as any;
-    // return fecha.toLocaleDateString('es-ES', opcionesFecha);
 
     const opcionesFecha = {
       weekday: 'long',

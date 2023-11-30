@@ -1,10 +1,9 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { BehaviorSubject } from 'rxjs';
-import { map, timeout } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Turno } from 'src/app/clases/turno';
 import { AlertasService } from 'src/app/services/alertas.service';
-import { Encuesta } from 'src/app/clases/encuesta';
 import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { openbox } from 'src/app/animations/animation';
@@ -171,9 +170,6 @@ export class TurnosPacienteComponent{
   }
 
   completarEncuesta(turno : Turno) {
-    // setTimeout(() =>{
-    //   this.encuesta = !this.encuesta;
-    // },500)
     
     setTimeout(() =>{
       this.isOpen = !this.isOpen;
@@ -192,7 +188,6 @@ export class TurnosPacienteComponent{
   }
 
   calificarAtencion(turno: Turno){
-    // console.log(turno);
     this.alertas.mostraAlertaInput('Reseña atención','Por favor, ingrese una reseña sobre la atencion de ' + turno.Especialista).then(texto=>{
 
       if(texto != undefined){

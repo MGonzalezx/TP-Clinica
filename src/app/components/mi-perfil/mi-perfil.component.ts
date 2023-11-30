@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Horario } from 'src/app/clases/horario';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { Router } from '@angular/router';
 import { slideInAnimation } from 'src/app/animations/animation';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { HistoriaClinica } from 'src/app/clases/historia-clinica';
 import { HttpClient } from '@angular/common/http';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Turno } from 'src/app/clases/turno';
 import { Especialista } from 'src/app/clases/especialista';
 (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
@@ -33,9 +30,7 @@ export class MiPerfilComponent implements OnInit {
 
   constructor(
     private authService: FirebaseService,
-    private router: Router,
     private http: HttpClient,
-    private sanitizer: DomSanitizer
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -139,12 +134,12 @@ export class MiPerfilComponent implements OnInit {
       now.getMonth() + 1
     }/${now.getFullYear()} a las ${now.getHours()}:${now.getMinutes()} hs`;
 
-    // Ordenar las historias clínicas por fecha
+    // Ordenamos las historias clínicas por fecha
     historiasPruebaPdf.sort(
       (a, b) => new Date(a.fecha).getTime() - new Date(b.fecha).getTime()
     );
     let historiasClinicasArray = historiasPruebaPdf.map((historiaPruebaPdf) => {
-      // Crear un objeto con solo los datos que quieres incluir
+      // Creamos un objeto con solo los datos que quieres incluir
 
       let historiaClinicaSeleccionada: any = {
         Especialidad: historiaPruebaPdf.Especialidad,

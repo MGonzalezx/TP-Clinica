@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable  } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Turno } from 'src/app/clases/turno';
 import { AlertasService } from 'src/app/services/alertas.service';
-import Swal from 'sweetalert2';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -94,15 +93,6 @@ export class AdministrarTurnosComponent {
     this._turnos.next(this._turnos.value);
   }
 
-  // obtenerFechaHoraFormateada(fecha: any, hora: string): string {
-  //   const fechaFormateada = fecha.toDate().toLocaleDateString('es-AR');
-  //   return `${fechaFormateada} ${hora}`;
-  // }
-
-  // obtenerFechaFormateada(fecha: any): string {
-  //   const fechaFormateada = fecha.toDate().toLocaleDateString('es-AR');
-  //   return `${fechaFormateada}`;
-  // }
 
   async cancelarTurno( turno: Turno) {
     this.alertas.mostraAlertaInput('Cancelar Turno','Ingrese motivo de la cancelación').then(comentario=>{

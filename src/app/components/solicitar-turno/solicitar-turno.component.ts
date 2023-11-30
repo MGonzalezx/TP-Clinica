@@ -1,11 +1,9 @@
 import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Especialidad } from 'src/app/clases/especialidad';
 import { Especialista } from 'src/app/clases/especialista';
 import { Paciente } from 'src/app/clases/paciente';
@@ -40,7 +38,7 @@ export class SolicitarTurnoComponent implements OnInit {
   especialidad: string | undefined = undefined;
   especialistaFalso:boolean = false;
 
-  constructor(private authService: FirebaseService, private router: Router, private cdr: ChangeDetectorRef) 
+  constructor(private authService: FirebaseService, private cdr: ChangeDetectorRef) 
   {
 
   }
@@ -70,7 +68,7 @@ export class SolicitarTurnoComponent implements OnInit {
 
   onEspecialidadChange(uid: any) {
     this.especialidadSeleccionada = uid;
-    //this.especialidad = uid;
+    
     this.form.controls['especialidad'].setValue(uid);
     this.fechaObtenida = false;
    
@@ -87,7 +85,7 @@ export class SolicitarTurnoComponent implements OnInit {
     this.fechaObtenida = false;
     this.cdr.detectChanges();
     
-    //console.log(this.especialidad);
+    
     
   }
 

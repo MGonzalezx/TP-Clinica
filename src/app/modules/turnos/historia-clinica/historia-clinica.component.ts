@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AbstractControl,FormArray,FormBuilder,FormControl,FormGroup,Validators} from '@angular/forms';
+import { Component,  Input,  } from '@angular/core';
+import { AbstractControl,FormArray,FormBuilder,FormGroup,Validators} from '@angular/forms';
 import { HistoriaClinica } from 'src/app/clases/historia-clinica';
 import { Turno } from 'src/app/clases/turno';
 import { AlertasService } from 'src/app/services/alertas.service';

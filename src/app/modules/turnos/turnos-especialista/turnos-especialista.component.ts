@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { BehaviorSubject,TruthyTypesOf  } from 'rxjs';
+import { BehaviorSubject  } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Turno } from 'src/app/clases/turno';
 import Swal from 'sweetalert2';

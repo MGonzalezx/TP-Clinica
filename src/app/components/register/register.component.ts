@@ -19,25 +19,20 @@ export class RegisterComponent implements OnInit {
 
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
-  if (user) {
+    if (user) {
    
-    const uid = user.uid;
-    console.log(uid);
-    const admin =  this.authService.getUserByUidAndType(uid,'admins');
-    if(admin != null){
-      this.seLogueoAdmin = true;
-    }
+      const uid = user.uid;
+      console.log(uid);
+      const admin =  this.authService.getUserByUidAndType(uid,'admins');
+      if(admin != null){
+        this.seLogueoAdmin = true;
+      }
    
-  } else {
+    } else {
     
-  }
-});
-    // const user = 
-    // const admin =  this.authService.getAdminByUid(user!.uid);
-    // console.log(user);
-    // if(admin !== null){
-    //   this.seLogueoAdmin = true;
-    // }
+      }
+    });
+    
   }
   
   mostrarRegistroPacientes: boolean = false;

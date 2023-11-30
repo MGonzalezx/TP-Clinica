@@ -1,35 +1,24 @@
-<div   [@slideInAnimation] class="container" style="caret-color: transparent;">
-
+<div [@slideInAnimation] class="container" style="caret-color: transparent">
   <div class="row">
+    <div class="col-sm-5 colum02">
+      <img src="../../../favicon.ico" width="100%" />
+    </div>
 
-      <div class="col-sm-5 colum02">
-      <!-- <div class="col-sm-7"> -->
-          
-          <img src="../../../favicon.ico" width="100%">
-  
-      </div>
+    <br /><br />
+    <div class="col-sm-7 colum01">
+      <h1 class="titulo">Clinica Angeles</h1>
 
-      <br><br>
-      <div class="col-sm-7 colum01">
+      <h4>Tu bienestar, nuestra prioridad</h4>
+    </div>
 
-        <h1 class="titulo" > Clinica Angeles </h1>
+    <form class="form-signin">
+      <button class="w-100 btn btn-lg btn-primary mb-3" (click)="goToLogin()">
+        Inicio de Sesión
+      </button>
 
-        <h4>Tu bienestar, nuestra prioridad</h4>
-              
-        
-          
-      
-      </div>
-
-      <form class="form-signin">
-      
-        <button class="w-100 btn btn-lg btn-primary mb-3" (click)="goToLogin()">Inicio de Sesión</button>
-  
-        <button class="w-100 btn btn-lg btn-primary"  (click)="goToRegister()">Registro</button>
-      </form>
-
-
-
+      <button class="w-100 btn btn-lg btn-primary" (click)="goToRegister()">
+        Registro
+      </button>
+    </form>
   </div>
-
 </div>

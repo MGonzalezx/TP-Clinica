@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Encuesta } from 'src/app/clases/encuesta';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import Swal from 'sweetalert2';
@@ -19,7 +18,7 @@ export class EncuestaComponent {
   checkError: boolean = false;
   errorMessage: string = '';
   @Output() encuestaEnviada = new EventEmitter<string>();
-  constructor(private authService: FirebaseService, private router: Router) {}
+  constructor(private authService: FirebaseService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
